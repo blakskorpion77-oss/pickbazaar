@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Connect With Dropship Suppliers Worldwide — PickBazaar Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#c8001e;--black:#111;--white:#fff;--offwhite:#f8f7f4;--gray:#f0eeea;--border:#e4e2de;--text:#222;--muted:#777;--gold:#d4a017;--green:#1a7f4b;--display:'Playfair Display',serif;--body:'Inter',sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:var(--body);line-height:1.7;}
+a{color:var(--brand);}
+strong{color:var(--black);font-weight:700;}
+code{background:#f0eeea;border-radius:3px;padding:2px 7px;font-family:monospace;font-size:0.85rem;color:var(--brand);}
+
+.layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh;max-width:1200px;margin:0 auto;}
+.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;padding:2rem 1.25rem;border-right:1px solid var(--border);background:var(--offwhite);}
+.sidebar-logo{font-family:var(--display);font-size:1.1rem;font-weight:800;margin-bottom:0.5rem;}
+.sidebar-logo span{color:var(--brand);}
+.sidebar-back{font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);}
+.sidebar-back a{color:var(--brand);font-weight:600;}
+.nav-section{font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin:1.25rem 0 0.5rem;padding:0 0.5rem;}
+.nav-item{display:block;padding:7px 10px;border-radius:6px;font-size:0.82rem;color:var(--muted);transition:all 0.15s;cursor:pointer;border-left:2px solid transparent;}
+.nav-item:hover{color:var(--black);background:rgba(0,0,0,0.04);}
+.nav-item.active{color:var(--brand);background:#fff5f5;border-left-color:var(--brand);font-weight:600;}
+
+.main{padding:3rem 3rem 6rem;}
+h1{font-family:var(--display);font-size:2.2rem;font-weight:800;margin-bottom:0.5rem;letter-spacing:-0.01em;line-height:1.15;}
+h2{font-family:var(--display);font-size:1.5rem;font-weight:800;margin:2.5rem 0 0.75rem;letter-spacing:-0.01em;}
+h3{font-weight:700;font-size:1rem;margin:1.75rem 0 0.5rem;}
+p{color:rgba(0,0,0,0.75);margin-bottom:0.9rem;font-size:0.93rem;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{font-size:0.93rem;color:rgba(0,0,0,0.75);margin-bottom:0.4rem;line-height:1.6;}
+
+.section{padding-top:2rem;margin-top:2rem;border-top:1px solid var(--border);}
+.section:first-child{border-top:none;margin-top:0;padding-top:0;}
+.eyebrow{font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--brand);margin-bottom:0.4rem;}
+.intro-pills{display:flex;gap:0.75rem;flex-wrap:wrap;margin:1rem 0 2rem;}
+.pill{display:inline-flex;align-items:center;gap:6px;background:var(--gray);border:1px solid var(--border);border-radius:4px;padding:5px 12px;font-size:0.75rem;font-weight:600;color:var(--muted);}
+
+/* Supplier cards */
+.sup-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.25rem 0;}
+.sup-card{background:var(--offwhite);border:1px solid var(--border);border-radius:10px;padding:1.25rem;transition:all 0.15s;}
+.sup-card:hover{border-color:var(--brand);background:#fff5f5;}
+.sup-card.featured{border-color:var(--brand);background:#fff8f8;}
+.sup-head{display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;}
+.sup-icon{font-size:1.6rem;}
+.sup-name{font-weight:800;font-size:0.95rem;color:var(--black);}
+.sup-region{font-size:0.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
+.sup-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.6rem;}
+.stag{padding:2px 8px;border-radius:3px;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;border:1.5px solid;}
+.t-free{border-color:var(--green);color:var(--green);}
+.t-fast{border-color:#1565c0;color:#1565c0;}
+.t-usa{border-color:var(--brand);color:var(--brand);}
+.t-eu{border-color:#ad6c00;color:#ad6c00;}
+.t-api{border-color:#6a1b9a;color:#6a1b9a;}
+.t-paid{border-color:var(--muted);color:var(--muted);}
+.sup-desc{font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:0.75rem;}
+.sup-steps{display:flex;flex-direction:column;gap:0.4rem;}
+.sup-step{font-size:0.8rem;color:var(--text);display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.sup-step-n{background:var(--brand);color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.62rem;font-weight:800;flex-shrink:0;margin-top:2px;}
+.sup-link{display:inline-flex;align-items:center;gap:4px;margin-top:0.75rem;font-size:0.78rem;font-weight:700;color:var(--brand);}
+.sup-link:hover{text-decoration:underline;}
+
+/* Steps */
+.steps-list{display:flex;flex-direction:column;gap:1rem;margin:1.25rem 0;}
+.step-item{display:flex;gap:1rem;background:var(--offwhite);border:1px solid var(--border);border-radius:10px;padding:1.25rem;}
+.step-num{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;margin-top:2px;}
+.step-body h4{font-weight:800;font-size:0.93rem;margin-bottom:3px;}
+.step-body p{font-size:0.83rem;margin:0;color:var(--muted);}
+
+/* Info boxes */
+.box{border-radius:8px;padding:1rem 1.25rem;margin:1.25rem 0;font-size:0.875rem;line-height:1.65;}
+.box-info{background:#f0f4ff;border:1px solid #bbd0ff;color:#1a3a7a;}
+.box-warn{background:#fffbf0;border:1px solid #f5d87a;color:#7a5c00;}
+.box-success{background:#f0fff7;border:1px solid #7adba4;color:#1a5c3a;}
+.box-red{background:#fff5f5;border:1px solid #ffb0b0;color:#7a0000;}
+.box-icon{margin-right:6px;}
+
+/* Table */
+.comp-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.83rem;}
+.comp-table th{text-align:left;padding:9px 12px;background:var(--black);color:#fff;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;}
+.comp-table td{padding:9px 12px;border-bottom:1px solid var(--border);}
+.comp-table tr:nth-child(even) td{background:var(--offwhite);}
+.comp-table tr:last-child td{border-bottom:none;}
+.green{color:var(--green);font-weight:700;}
+.red{color:var(--brand);font-weight:700;}
+
+/* Checklist */
+.checklist{list-style:none;padding:0;margin:1rem 0;}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.875rem;}
+.checklist li:last-child{border-bottom:none;}
+.ck{color:var(--green);font-weight:800;flex-shrink:0;margin-top:2px;}
+
+/* Niche table */
+.niche-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.82rem;}
+.niche-table th{text-align:left;padding:8px 12px;background:var(--gray);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);border-bottom:1px solid var(--border);font-weight:700;}
+.niche-table td{padding:9px 12px;border-bottom:1px solid var(--border);}
+.niche-table tr:last-child td{border-bottom:none;}
+
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{position:relative;height:auto;}
+  .main{padding:2rem 1.25rem 4rem;}
+  .sup-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">Pick<span>Bazaar</span></div>
+  <div class="sidebar-back">← <a href="landing.html">Back to Shop</a> · <a href="my-shop.html">Admin</a></div>
+  <div class="nav-section">Getting Started</div>
+  <a class="nav-item active" href="#overview">Overview</a>
+  <a class="nav-item" href="#how-dropship-works">How Dropshipping Works</a>
+  <a class="nav-item" href="#what-you-need">What You Need First</a>
+  <div class="nav-section">Top Suppliers</div>
+  <a class="nav-item" href="#cj">CJ Dropshipping ⭐ Best for USA</a>
+  <a class="nav-item" href="#aliexpress">AliExpress / DSers</a>
+  <a class="nav-item" href="#zendrop">Zendrop</a>
+  <a class="nav-item" href="#spocket">Spocket (UK/EU)</a>
+  <a class="nav-item" href="#printful">Printful (Print on Demand)</a>
+  <a class="nav-item" href="#worldwide">More Global Suppliers</a>
+  <div class="nav-section">By Niche</div>
+  <a class="nav-item" href="#niche-fashion">Fashion & Clothing</a>
+  <a class="nav-item" href="#niche-electronics">Electronics & Gadgets</a>
+  <a class="nav-item" href="#niche-pets">Pets</a>
+  <a class="nav-item" href="#niche-auto">Auto Accessories</a>
+  <a class="nav-item" href="#niche-gym">Gym & Fitness</a>
+  <a class="nav-item" href="#niche-beauty">Beauty & Health</a>
+  <a class="nav-item" href="#niche-home">Home & Garden</a>
+  <div class="nav-section">Running It</div>
+  <a class="nav-item" href="#order-flow">Daily Order Flow</a>
+  <a class="nav-item" href="#pricing">Pricing for Profit</a>
+  <a class="nav-item" href="#shipping">USA & Global Shipping</a>
+  <a class="nav-item" href="#checklist">Launch Checklist</a>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- OVERVIEW -->
+<div id="overview" class="section">
+  <div class="eyebrow">Complete Supplier Guide</div>
+  <h1>How to Connect With Dropship Suppliers Worldwide</h1>
+  <div class="intro-pills">
+    <div class="pill">🌍 USA & Global</div>
+    <div class="pill">🐾 Pets</div>
+    <div class="pill">🚗 Auto</div>
+    <div class="pill">💪 Gym & Fitness</div>
+    <div class="pill">👗 Fashion</div>
+    <div class="pill">📱 Electronics</div>
+    <div class="pill">💄 Beauty</div>
+    <div class="pill">🏡 Home</div>
+  </div>
+  <p>This guide walks you through exactly how to sign up with the world's best dropshipping suppliers, which ones work best for each niche, and how to connect everything to your PickBazaar shop so orders flow automatically.</p>
+  <div class="box box-success"><span class="box-icon">✅</span><strong>Bottom line first:</strong> Start with <strong>CJ Dropshipping</strong> for USA orders (5–8 day delivery) and <strong>AliExpress/DSers</strong> for the widest product range. Add <strong>Spocket</strong> once you're selling to UK/Europe. That covers 90% of what you need.</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div id="how-dropship-works" class="section">
+  <h2>How Dropshipping Actually Works</h2>
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num" style="background:#1a7f4b;color:#fff">1</div><div class="step-body"><h4>Customer buys from your shop</h4><p>They pay via Stripe. Money goes directly into your Stripe account. You don't need to touch it yet.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#1565c0;color:#fff">2</div><div class="step-body"><h4>You place the order with your supplier</h4><p>Go to CJ Dropshipping / AliExpress / Zendrop and buy the same product, entering the customer's shipping address. You pay the supplier cost (e.g. $8).</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#ad6c00;color:#fff">3</div><div class="step-body"><h4>Supplier ships directly to your customer</h4><p>Your supplier packs and ships the product to your customer. You never touch or store the product. They ship it as if it's from you.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:var(--brand);color:#fff">4</div><div class="step-body"><h4>You keep the difference</h4><p>Customer paid $29.99. You paid supplier $8. You keep $21.99 minus Stripe's 2.9% fee. That's your profit — no stock risk.</p></div></div>
+  </div>
+</div>
+
+<!-- WHAT YOU NEED -->
+<div id="what-you-need" class="section">
+  <h2>What You Need Before Connecting Suppliers</h2>
+  <ul>
+    <li><strong>A Stripe account</strong> — stripe.com (free, takes 10 minutes). This is how you get paid by customers.</li>
+    <li><strong>A business email address</strong> — Use Gmail to start (e.g. pickbazaarshop@gmail.com). Suppliers will email you.</li>
+    <li><strong>A PayPal account (optional)</strong> — Some suppliers prefer PayPal. Sign up at paypal.com. Free.</li>
+    <li><strong>Your bank details</strong> — You'll need these to receive payouts from Stripe and to pay suppliers.</li>
+    <li><strong>A business name</strong> — "PickBazaar" or whatever you want. You don't need a registered company to start — many dropshippers start as a sole trader.</li>
+  </ul>
+  <div class="box box-warn"><span class="box-icon">⚠️</span>Most supplier accounts are <strong>free to create</strong>. Never pay for a "supplier list" or any upfront fee to access products. Legitimate dropshipping suppliers make money per order, not from signup fees.</div>
+</div>
+
+<!-- CJ DROPSHIPPING -->
+<div id="cj" class="section">
+  <div class="eyebrow">⭐ Best Supplier for USA Selling</div>
+  <h2>CJ Dropshipping</h2>
+  <p><strong>Why it's #1 for your shop:</strong> CJ has a warehouse in the USA. Products shipped from there arrive in 5–8 days — which is what American customers expect. They also have free API access, quality checks, and will do custom packaging with your brand on it.</p>
+
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num" style="background:var(--brand);color:#fff">1</div><div class="step-body"><h4>Create your free account</h4><p>Go to <strong>cjdropshipping.com</strong> → click "Sign Up" → use your business email. It's completely free.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:var(--brand);color:#fff">2</div><div class="step-body"><h4>Search for products</h4><p>Use the search bar to find products in your niches — pets, auto, gym, fashion etc. Filter by "USA Warehouse" to ensure fast delivery to American customers.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:var(--brand);color:#fff">3</div><div class="step-body"><h4>Check the product listing</h4><p>Look at: cost price, shipping time, stock availability, and reviews from other sellers. Request a sample ($3–10) before listing anything — always test quality first.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:var(--brand);color:#fff">4</div><div class="step-body"><h4>Add the product to your shop</h4><p>In your PickBazaar Admin → Add Product. Note the supplier cost and set your selling price. Use the Profit Calculator to make sure you're earning at least 60% margin.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:var(--brand);color:#fff">5</div><div class="step-body"><h4>When a customer orders, fulfil via CJ</h4><p>Log in to CJ → find the product → place order → paste in your customer's shipping name and address → pay CJ's cost price → they ship directly to your customer.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:var(--brand);color:#fff">6</div><div class="step-body"><h4>Get the tracking number</h4><p>CJ sends you a tracking number. Email it to your customer. Update the order status in your Admin to "Shipped".</p></div></div>
+  </div>
+
+  <div class="box box-info"><span class="box-icon">💡</span><strong>Pro tip:</strong> In CJ, go to <strong>My Products → Add to List</strong> for every product you sell regularly. This lets you fulfil orders in seconds rather than searching every time.</div>
+  <a href="https://cjdropshipping.com" target="_blank" class="sup-link">→ Visit CJ Dropshipping</a>
+</div>
+
+<!-- ALIEXPRESS -->
+<div id="aliexpress" class="section">
+  <h2>AliExpress & DSers</h2>
+  <p>AliExpress has 100M+ products — more than any other supplier. The downside for USA customers is shipping time (10–20 days standard). Use AliExpress to <strong>find products and test ideas</strong>, then switch to CJ Dropshipping for fulfilment once something sells.</p>
+
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num" style="background:#ff6600;color:#fff">1</div><div class="step-body"><h4>Create AliExpress account</h4><p>Go to <strong>aliexpress.com</strong> → Sign Up → use your email. Free. You'll use this to browse and research products.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#ff6600;color:#fff">2</div><div class="step-body"><h4>Sign up for DSers (AliExpress official partner)</h4><p>Go to <strong>dsers.com</strong> → Create account → connect to AliExpress. DSers is the official dropshipping tool — it lets you import products and process orders in bulk.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#ff6600;color:#fff">3</div><div class="step-body"><h4>Visit the Dropshipping Centre</h4><p>In AliExpress: go to <strong>aliexpress.com/dropshipping</strong>. This shows you products specifically available for dropshipping with sales data and supplier reliability scores.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#ff6600;color:#fff">4</div><div class="step-body"><h4>Choose suppliers with ePacket or AliExpress Standard Shipping</h4><p>These are the fastest options to the USA (10–15 days). Filter shipping method when searching. Avoid "China Post" — it can take 30–60 days.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#ff6600;color:#fff">5</div><div class="step-body"><h4>When a customer orders</h4><p>Log into AliExpress → find the product → place the order manually, entering the customer's shipping address. Or use DSers to bulk process multiple orders at once.</p></div></div>
+  </div>
+
+  <div class="box box-warn"><span class="box-icon">⚠️</span><strong>USA customers:</strong> Always be transparent about delivery times if using AliExpress. Say "10–15 business days" on your product pages. Underpromise and overdeliver. Switch to CJ's USA warehouse as soon as a product is selling well.</div>
+  <a href="https://dsers.com" target="_blank" class="sup-link">→ Visit DSers (Official AliExpress Partner)</a>
+</div>
+
+<!-- ZENDROP -->
+<div id="zendrop" class="section">
+  <h2>Zendrop</h2>
+  <p>Zendrop is perfect if you want <strong>automated fulfilment</strong>. Once connected, orders from your shop can be automatically forwarded to Zendrop who packs and ships without you doing anything manually. Strong US inventory with 3–7 day delivery.</p>
+
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num" style="background:#6a1b9a;color:#fff">1</div><div class="step-body"><h4>Sign up at zendrop.com</h4><p>Free plan available. Start free, upgrade to paid only when you're consistently making sales.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#6a1b9a;color:#fff">2</div><div class="step-body"><h4>Browse the product catalogue</h4><p>Search by category. Zendrop has strong Health, Beauty, Fitness, and Electronics categories. Look for "US Warehouse" badge for fastest delivery.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#6a1b9a;color:#fff">3</div><div class="step-body"><h4>Import products to your list</h4><p>Click "Import" on any product. Set your selling price. Zendrop shows you the cost price so you know your margin upfront.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#6a1b9a;color:#fff">4</div><div class="step-body"><h4>Fulfil orders</h4><p>When a customer orders, go to Zendrop → Orders → place the order with the customer's address. On paid plans this happens automatically.</p></div></div>
+  </div>
+  <a href="https://zendrop.com" target="_blank" class="sup-link">→ Visit Zendrop</a>
+</div>
+
+<!-- SPOCKET -->
+<div id="spocket" class="section">
+  <h2>Spocket — UK & EU Suppliers</h2>
+  <p>Spocket connects you with suppliers based in the UK, USA, and Europe. This means 2–5 day delivery to UK/EU customers. Great for Beauty, Fashion, and Home niches targeting European buyers.</p>
+
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num" style="background:#1a7f4b;color:#fff">1</div><div class="step-body"><h4>Sign up at spocket.co</h4><p>Free plan lets you browse products. Paid plan ($24/month) needed to import products and fulfil orders.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#1a7f4b;color:#fff">2</div><div class="step-body"><h4>Filter by country</h4><p>Use filters to show UK suppliers, EU suppliers, or US suppliers. Choose based on where your customers are to get the fastest delivery.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#1a7f4b;color:#fff">3</div><div class="step-body"><h4>Import and fulfil</h4><p>Add products to your shop with one click. When orders come in, fulfil through Spocket — they contact the supplier and handle shipping for you.</p></div></div>
+  </div>
+  <div class="box box-info"><span class="box-icon">💡</span>Spocket is the best choice once you start getting UK and European orders. Products arrive in 2–5 days instead of 2–3 weeks from China.</div>
+  <a href="https://spocket.co" target="_blank" class="sup-link">→ Visit Spocket</a>
+</div>
+
+<!-- PRINTFUL -->
+<div id="printful" class="section">
+  <h2>Printful — Print on Demand</h2>
+  <p>Printful lets you sell <strong>custom branded products</strong> — t-shirts, hoodies, mugs, phone cases, tote bags — with your own logo. They print each item when ordered and ship from US facilities (3–5 days to USA).</p>
+  <p>This is the best way to build a real brand rather than just reselling generic products. Great for Fashion niche.</p>
+
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num" style="background:#333;color:#fff">1</div><div class="step-body"><h4>Create free account at printful.com</h4><p>No monthly fee. You only pay per item when an order comes in.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#333;color:#fff">2</div><div class="step-body"><h4>Design your products</h4><p>Use Printful's free design tool. Upload your logo, add text, pick colours. Start with t-shirts and tote bags — lowest risk, highest margin.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#333;color:#fff">3</div><div class="step-body"><h4>Order a sample first</h4><p>Always order a sample of any product before listing it. Printful gives 20% off samples. Test the quality yourself.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#333;color:#fff">4</div><div class="step-body"><h4>Add to your shop and fulfil</h4><p>When someone buys, manually order from Printful with the customer's address. On Shopify/WooCommerce this is automatic. For your PickBazaar shop, it's a quick manual step.</p></div></div>
+  </div>
+  <a href="https://printful.com" target="_blank" class="sup-link">→ Visit Printful</a>
+</div>
+
+<!-- WORLDWIDE SUPPLIERS -->
+<div id="worldwide" class="section">
+  <h2>More Global Suppliers Worth Knowing</h2>
+  <div class="sup-grid">
+    <div class="sup-card">
+      <div class="sup-head"><div class="sup-icon">🌏</div><div><div class="sup-name">SaleHoo</div><div class="sup-region">Global Directory</div></div></div>
+      <div class="sup-tags"><span class="stag t-paid">$67/year</span><span class="stag t-usa">Vetted Suppliers</span></div>
+      <p class="sup-desc">Directory of 8,000+ pre-vetted suppliers. Great for finding niche products not on AliExpress. Includes a market research tool to spot trending products.</p>
+      <a href="https://salehoo.com" target="_blank" class="sup-link">→ salehoo.com</a>
+    </div>
+    <div class="sup-card">
+      <div class="sup-head"><div class="sup-icon">🇺🇸</div><div><div class="sup-name">Modalyst</div><div class="sup-region">USA & European Suppliers</div></div></div>
+      <div class="sup-tags"><span class="stag t-free">Free Plan</span><span class="stag t-usa">US Brands</span><span class="stag t-fast">Fast Ship</span></div>
+      <p class="sup-desc">Specialises in independent USA brands. Great for Fashion and Beauty. Free plan available. Wix, Shopify, and BigCommerce integrations.</p>
+      <a href="https://modalyst.co" target="_blank" class="sup-link">→ modalyst.co</a>
+    </div>
+    <div class="sup-card">
+      <div class="sup-head"><div class="sup-icon">🇮🇳</div><div><div class="sup-name">IndiaMART</div><div class="sup-region">India — Manufacturing</div></div></div>
+      <div class="sup-tags"><span class="stag t-free">Free</span><span class="stag t-api">Low MOQ</span></div>
+      <p class="sup-desc">Best for sourcing Fashion, Home Textiles, and Beauty directly from Indian manufacturers. Great margins if you communicate directly with factories.</p>
+      <a href="https://indiamart.com" target="_blank" class="sup-link">→ indiamart.com</a>
+    </div>
+    <div class="sup-card">
+      <div class="sup-head"><div class="sup-icon">🌐</div><div><div class="sup-name">Alibaba</div><div class="sup-region">China — Wholesale</div></div></div>
+      <div class="sup-tags"><span class="stag t-free">Free Browse</span><span class="stag t-fast">Low Prices</span></div>
+      <p class="sup-desc">For buying in bulk once a product proves itself. Not traditional dropshipping — but once you're selling 50+ units of one product, buying in bulk massively increases margins.</p>
+      <a href="https://alibaba.com" target="_blank" class="sup-link">→ alibaba.com</a>
+    </div>
+    <div class="sup-card">
+      <div class="sup-head"><div class="sup-icon">🚀</div><div><div class="sup-name">AutoDS</div><div class="sup-region">Global Automation</div></div></div>
+      <div class="sup-tags"><span class="stag t-paid">From $9.90/mo</span><span class="stag t-api">Auto Fulfil</span></div>
+      <p class="sup-desc">Aggregates products from 25+ suppliers. Automatically processes orders, tracks prices, and updates stock levels. Great for scaling to high volume.</p>
+      <a href="https://autods.com" target="_blank" class="sup-link">→ autods.com</a>
+    </div>
+    <div class="sup-card">
+      <div class="sup-head"><div class="sup-icon">🇹🇷</div><div><div class="sup-name">Modalyst / Trendyol</div><div class="sup-region">Turkey — Fashion</div></div></div>
+      <div class="sup-tags"><span class="stag t-eu">EU Ship</span><span class="stag t-fast">Fast Fashion</span></div>
+      <p class="sup-desc">Turkish manufacturers produce high-quality fashion at low cost. Faster shipping to Europe than China. Great for Fashion niche targeting European customers.</p>
+      <a href="https://trendyol.com" target="_blank" class="sup-link">→ trendyol.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- NICHE: PETS -->
+<div id="niche-pets" class="section">
+  <div class="eyebrow">By Niche</div>
+  <h2>🐾 Pets — Best Suppliers</h2>
+  <p>The US pet market is worth $150 billion per year. Americans spend more on pets than almost any other consumer category. This is one of the most profitable niches for dropshipping.</p>
+  <table class="niche-table">
+    <thead><tr><th>Supplier</th><th>Best For</th><th>Shipping (USA)</th><th>Sign Up</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CJ Dropshipping</strong></td><td>Pet toys, beds, grooming, collars, feeders</td><td>5–8 days (USA warehouse)</td><td><a href="https://cjdropshipping.com">cjdropshipping.com</a></td></tr>
+      <tr><td><strong>AliExpress</strong></td><td>Everything pet-related, huge range</td><td>10–20 days</td><td><a href="https://aliexpress.com">aliexpress.com</a></td></tr>
+      <tr><td><strong>Zendrop</strong></td><td>Premium pet accessories, US stock</td><td>3–7 days</td><td><a href="https://zendrop.com">zendrop.com</a></td></tr>
+      <tr><td><strong>Spocket</strong></td><td>UK/EU pet products</td><td>2–5 days (UK)</td><td><a href="https://spocket.co">spocket.co</a></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Top pet products right now:</strong> self-cleaning brushes, interactive puzzle toys, GPS pet trackers, anti-anxiety dog blankets, automatic feeders, retractable leads, paw cleaners, pet cameras.</p>
+</div>
+
+<!-- NICHE: AUTO -->
+<div id="niche-auto" class="section">
+  <h2>🚗 Auto Accessories — Best Suppliers</h2>
+  <p>Auto accessories are impulse buys with high margins. Americans love upgrading their cars and trucks. Average order value is higher than most niches.</p>
+  <table class="niche-table">
+    <thead><tr><th>Supplier</th><th>Best For</th><th>Shipping (USA)</th><th>Sign Up</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CJ Dropshipping</strong></td><td>Car organisers, phone mounts, chargers, vacuums</td><td>5–8 days</td><td><a href="https://cjdropshipping.com">cjdropshipping.com</a></td></tr>
+      <tr><td><strong>AliExpress</strong></td><td>Dash cams, LED lights, seat covers, tools</td><td>10–20 days</td><td><a href="https://aliexpress.com">aliexpress.com</a></td></tr>
+      <tr><td><strong>AutoDS</strong></td><td>Auto accessories with automated fulfilment</td><td>Varies by supplier</td><td><a href="https://autods.com">autods.com</a></td></tr>
+      <tr><td><strong>SaleHoo</strong></td><td>Vetted US auto suppliers</td><td>Domestic USA</td><td><a href="https://salehoo.com">salehoo.com</a></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Top auto products right now:</strong> wireless car chargers, car seat organisers, dash cams, LED interior lights, trunk cargo nets, steering wheel covers, tyre inflators, air fresheners.</p>
+</div>
+
+<!-- NICHE: GYM -->
+<div id="niche-gym" class="section">
+  <h2>💪 Gym & Fitness — Best Suppliers</h2>
+  <p>Fitness is massive and growing. Home gym equipment, workout accessories, and supplements are some of the highest-converting products in dropshipping.</p>
+  <table class="niche-table">
+    <thead><tr><th>Supplier</th><th>Best For</th><th>Shipping (USA)</th><th>Sign Up</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CJ Dropshipping</strong></td><td>Resistance bands, yoga mats, weights, jump ropes</td><td>5–8 days</td><td><a href="https://cjdropshipping.com">cjdropshipping.com</a></td></tr>
+      <tr><td><strong>Zendrop</strong></td><td>Premium fitness gear, supplements, trackers</td><td>3–7 days</td><td><a href="https://zendrop.com">zendrop.com</a></td></tr>
+      <tr><td><strong>AliExpress</strong></td><td>Full gym range, very low cost</td><td>10–20 days</td><td><a href="https://aliexpress.com">aliexpress.com</a></td></tr>
+      <tr><td><strong>Spocket</strong></td><td>UK/EU fitness brands, quality suppliers</td><td>2–5 days (UK)</td><td><a href="https://spocket.co">spocket.co</a></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Top gym products right now:</strong> resistance band sets, ab rollers, yoga mats, foam rollers, fitness trackers, jump ropes, pull-up bars, gym gloves, water bottles, massage guns.</p>
+</div>
+
+<!-- NICHE: FASHION -->
+<div id="niche-fashion" class="section">
+  <h2>👗 Fashion & Clothing — Best Suppliers</h2>
+  <table class="niche-table">
+    <thead><tr><th>Supplier</th><th>Best For</th><th>Sign Up</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Printful</strong></td><td>Custom branded clothing — t-shirts, hoodies, hats</td><td><a href="https://printful.com">printful.com</a></td></tr>
+      <tr><td><strong>Spocket</strong></td><td>Trendy fashion from US/EU suppliers</td><td><a href="https://spocket.co">spocket.co</a></td></tr>
+      <tr><td><strong>CJ Dropshipping</strong></td><td>Affordable fashion, jewellery, accessories</td><td><a href="https://cjdropshipping.com">cjdropshipping.com</a></td></tr>
+      <tr><td><strong>Modalyst</strong></td><td>Independent US fashion brands</td><td><a href="https://modalyst.co">modalyst.co</a></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- NICHE: ELECTRONICS -->
+<div id="niche-electronics" class="section">
+  <h2>📱 Electronics & Gadgets — Best Suppliers</h2>
+  <table class="niche-table">
+    <thead><tr><th>Supplier</th><th>Best For</th><th>Sign Up</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CJ Dropshipping</strong></td><td>Earbuds, phone accessories, smart home, cables</td><td><a href="https://cjdropshipping.com">cjdropshipping.com</a></td></tr>
+      <tr><td><strong>AliExpress</strong></td><td>Huge electronics range, lowest prices</td><td><a href="https://aliexpress.com">aliexpress.com</a></td></tr>
+      <tr><td><strong>Zendrop</strong></td><td>Gadgets with fast US delivery</td><td><a href="https://zendrop.com">zendrop.com</a></td></tr>
+    </tbody>
+  </table>
+  <div class="box box-warn"><span class="box-icon">⚠️</span>Always test electronics personally before selling. Order a sample. Check it works. Electronics have the highest return rate of any niche — only list things you've verified work.</div>
+</div>
+
+<!-- NICHE: BEAUTY -->
+<div id="niche-beauty" class="section">
+  <h2>💄 Beauty & Health — Best Suppliers</h2>
+  <table class="niche-table">
+    <thead><tr><th>Supplier</th><th>Best For</th><th>Sign Up</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Spocket</strong></td><td>US/EU beauty brands, skincare, wellness</td><td><a href="https://spocket.co">spocket.co</a></td></tr>
+      <tr><td><strong>Zendrop</strong></td><td>Health supplements, beauty tools</td><td><a href="https://zendrop.com">zendrop.com</a></td></tr>
+      <tr><td><strong>CJ Dropshipping</strong></td><td>Makeup tools, hair care, skincare sets</td><td><a href="https://cjdropshipping.com">cjdropshipping.com</a></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- NICHE: HOME -->
+<div id="niche-home" class="section">
+  <h2>🏡 Home & Garden — Best Suppliers</h2>
+  <table class="niche-table">
+    <thead><tr><th>Supplier</th><th>Best For</th><th>Sign Up</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CJ Dropshipping</strong></td><td>Kitchen gadgets, LED lighting, decor, tools</td><td><a href="https://cjdropshipping.com">cjdropshipping.com</a></td></tr>
+      <tr><td><strong>Spocket</strong></td><td>Unique home products from US/EU suppliers</td><td><a href="https://spocket.co">spocket.co</a></td></tr>
+      <tr><td><strong>AliExpress</strong></td><td>Massive home range at lowest prices</td><td><a href="https://aliexpress.com">aliexpress.com</a></td></tr>
+      <tr><td><strong>Printful</strong></td><td>Custom printed home decor (mugs, cushions, art)</td><td><a href="https://printful.com">printful.com</a></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ORDER FLOW -->
+<div id="order-flow" class="section">
+  <h2>Your Daily Order Flow</h2>
+  <p>This is exactly what you do each day when orders come in:</p>
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num" style="background:var(--green);color:#fff">1</div><div class="step-body"><h4>Check Stripe for new payments</h4><p>Log into stripe.com → Payments. Every payment is a new order. Note the customer name, email, and amount.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#1565c0;color:#fff">2</div><div class="step-body"><h4>Email the customer to confirm</h4><p>Send a quick email: "Hi [name], thanks for your order! We're processing it now and will send your tracking number within 48 hours." This prevents "where's my order?" messages.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#ad6c00;color:#fff">3</div><div class="step-body"><h4>Place the order with your supplier</h4><p>Go to CJ/Zendrop/AliExpress. Find the product. Place the order. Enter the customer's shipping address. Pay with your card or PayPal.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:#6a1b9a;color:#fff">4</div><div class="step-body"><h4>Get tracking number from supplier</h4><p>Your supplier emails you a tracking number (usually within 1–2 days). Forward it to your customer immediately.</p></div></div>
+    <div class="step-item"><div class="step-num" style="background:var(--brand);color:#fff">5</div><div class="step-body"><h4>Update your Admin</h4><p>In PickBazaar Admin → Orders → log the order with customer name, product, sale price, supplier cost. Update status to "Shipped". Log the payment in Stripe & Payments section.</p></div></div>
+  </div>
+  <p><strong>Time this takes:</strong> 15–30 minutes per day for up to 10 orders. At 20+ orders per day, consider AutoDS for automation.</p>
+</div>
+
+<!-- PRICING -->
+<div id="pricing" class="section">
+  <h2>Pricing for Profit</h2>
+  <p>Use this as your minimum pricing rule:</p>
+  <div class="box box-success"><strong>Your Price = Supplier Cost × 3 (minimum)</strong><br>Example: Product costs $8 from CJ → Sell for $24.99 minimum<br>This covers Stripe's 2.9% fee, occasional refunds, and leaves ~60% margin.</div>
+
+  <table class="comp-table">
+    <thead><tr><th>Niche</th><th>Typical Supplier Cost</th><th>Recommended Price</th><th>Your Margin</th></tr></thead>
+    <tbody>
+      <tr><td>Pet accessories</td><td>$3–8</td><td>$12.99–$24.99</td><td class="green">65–75%</td></tr>
+      <tr><td>Auto accessories</td><td>$6–15</td><td>$19.99–$49.99</td><td class="green">60–70%</td></tr>
+      <tr><td>Gym & fitness</td><td>$8–20</td><td>$24.99–$59.99</td><td class="green">60–72%</td></tr>
+      <tr><td>Fashion</td><td>$5–12</td><td>$19.99–$39.99</td><td class="green">65–75%</td></tr>
+      <tr><td>Electronics</td><td>$8–25</td><td>$24.99–$69.99</td><td class="green">55–68%</td></tr>
+      <tr><td>Beauty</td><td>$5–10</td><td>$18.99–$34.99</td><td class="green">65–75%</td></tr>
+      <tr><td>Home & garden</td><td>$8–18</td><td>$24.99–$49.99</td><td class="green">60–70%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SHIPPING -->
+<div id="shipping" class="section">
+  <h2>USA & Global Shipping — What to Tell Customers</h2>
+  <table class="comp-table">
+    <thead><tr><th>Supplier</th><th>USA Delivery</th><th>UK Delivery</th><th>Australia</th><th>Best For</th></tr></thead>
+    <tbody>
+      <tr><td>CJ (USA Warehouse)</td><td class="green">5–8 days</td><td>10–15 days</td><td>12–18 days</td><td>USA priority</td></tr>
+      <tr><td>Zendrop (US Stock)</td><td class="green">3–7 days</td><td>10–14 days</td><td>12–18 days</td><td>Fastest USA</td></tr>
+      <tr><td>Spocket (UK/EU)</td><td>7–12 days</td><td class="green">2–5 days</td><td>10–15 days</td><td>UK/EU priority</td></tr>
+      <tr><td>AliExpress ePacket</td><td>10–15 days</td><td>10–15 days</td><td>12–20 days</td><td>Low cost testing</td></tr>
+      <tr><td>Printful (US Print)</td><td class="green">3–5 days</td><td>5–10 days</td><td>10–15 days</td><td>Custom branding</td></tr>
+    </tbody>
+  </table>
+  <div class="box box-red"><span class="box-icon">🚨</span><strong>Critical rule:</strong> Never use standard AliExpress "China Post" shipping for US customers. It can take 30–60 days. Customers will open disputes. Always use ePacket, AliExpress Standard Shipping, or switch to CJ's US warehouse.</div>
+</div>
+
+<!-- CHECKLIST -->
+<div id="checklist" class="section">
+  <h2>Supplier Setup Checklist</h2>
+  <p>Complete this before your first sale:</p>
+  <ul class="checklist">
+    <li><span class="ck">☐</span>CJ Dropshipping account created (cjdropshipping.com)</li>
+    <li><span class="ck">☐</span>AliExpress account created (aliexpress.com)</li>
+    <li><span class="ck">☐</span>DSers account connected to AliExpress (dsers.com)</li>
+    <li><span class="ck">☐</span>Zendrop account created (zendrop.com)</li>
+    <li><span class="ck">☐</span>Stripe account created and bank account connected (stripe.com)</li>
+    <li><span class="ck">☐</span>Stripe payment link created for at least 5 products</li>
+    <li><span class="ck">☐</span>Sample ordered and received for at least 3 products</li>
+    <li><span class="ck">☐</span>Each product listed in PickBazaar Admin with supplier cost and selling price noted</li>
+    <li><span class="ck">☐</span>Profit calculator checked — all products have 60%+ margin</li>
+    <li><span class="ck">☐</span>Confirmed CJ products are in USA warehouse (search "USA" filter)</li>
+    <li><span class="ck">☐</span>Landing page live on Netlify (drag and drop landing.html)</li>
+    <li><span class="ck">☐</span>Business email set up for customer replies</li>
+    <li><span class="ck">☐</span>TikTok/Instagram created — ready to post product content</li>
+  </ul>
+
+  <div class="box box-success" style="margin-top:2rem">
+    <span class="box-icon">🚀</span><strong>You're ready to launch.</strong> Start with CJ Dropshipping, list 5–10 products, post 3 TikTok videos showing each product, and put your shop link in your bio. Your first USA sale is closer than you think.
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+      const active=document.querySelector(`.nav-item[href="#${id}"]`);
+      if(active)active.classList.add('active');
+    }
+  });
+},{threshold:0.2});
+document.querySelectorAll('.section[id]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

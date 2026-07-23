@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Run Your Shop — Complete Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#05070F;--navy2:#0C0F1E;--card:#12162B;--indigo:#5B3FFF;--coral:#FF3D3D;--yellow:#FFE135;--cyan:#00D4FF;--lime:#AAFF57;--white:#fff;--muted:#7A7A9A;--border:rgba(255,255,255,0.08);--display:'Space Grotesk',sans-serif;--body:'DM Sans',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--navy);color:var(--white);font-family:var(--body);line-height:1.7;}
+a{color:var(--cyan);}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh;max-width:1200px;margin:0 auto;}
+.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;padding:2rem 1.25rem;border-right:1px solid var(--border);background:var(--navy2);}
+.main{padding:3rem 3rem 6rem;}
+
+/* Sidebar nav */
+.sidebar-logo{font-family:var(--display);font-size:1.1rem;font-weight:700;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+.sidebar-logo span{background:linear-gradient(90deg,var(--indigo),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-section{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin:1.25rem 0 0.5rem;padding:0 0.5rem;}
+.nav-item{display:block;padding:7px 10px;border-radius:8px;font-size:0.83rem;color:var(--muted);text-decoration:none;transition:all 0.2s;cursor:pointer;}
+.nav-item:hover{color:var(--white);background:rgba(255,255,255,0.04);}
+.nav-item.active{color:var(--white);background:rgba(91,63,255,0.15);font-weight:600;}
+
+/* Main content */
+h1{font-family:var(--display);font-size:2.2rem;font-weight:700;letter-spacing:-0.025em;margin-bottom:0.5rem;line-height:1.15;}
+h2{font-family:var(--display);font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;margin:2.5rem 0 0.75rem;}
+h3{font-family:var(--display);font-size:1.05rem;font-weight:600;margin:1.75rem 0 0.5rem;}
+p{color:rgba(255,255,255,0.82);margin-bottom:0.9rem;font-size:0.95rem;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{color:rgba(255,255,255,0.82);font-size:0.95rem;margin-bottom:0.4rem;}
+strong{color:var(--white);font-weight:600;}
+code{background:rgba(255,255,255,0.08);border-radius:5px;padding:2px 7px;font-family:monospace;font-size:0.85rem;color:var(--cyan);}
+
+/* Section divider */
+.section{padding-top:2rem;margin-top:2rem;border-top:1px solid var(--border);}
+.section:first-child{border-top:none;margin-top:0;padding-top:0;}
+
+/* Eyebrow */
+.eyebrow{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--indigo);margin-bottom:0.5rem;}
+
+/* Intro badge */
+.intro-meta{display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0 2rem;}
+.meta-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:0.78rem;color:var(--muted);}
+
+/* Step boxes */
+.steps{display:flex;flex-direction:column;gap:1rem;margin:1.25rem 0;}
+.step{display:flex;gap:1rem;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;}
+.step-num{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:0.9rem;font-weight:700;flex-shrink:0;margin-top:2px;}
+.step-body h4{font-family:var(--display);font-size:0.95rem;font-weight:700;margin-bottom:4px;}
+.step-body p{font-size:0.85rem;margin:0;color:var(--muted);}
+
+/* Info / warning boxes */
+.box{border-radius:12px;padding:1.1rem 1.25rem;margin:1.25rem 0;font-size:0.88rem;line-height:1.6;}
+.box-info{background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.2);color:rgba(255,255,255,0.85);}
+.box-warn{background:rgba(255,225,53,0.07);border:1px solid rgba(255,225,53,0.25);color:rgba(255,255,255,0.85);}
+.box-success{background:rgba(170,255,87,0.07);border:1px solid rgba(170,255,87,0.2);color:rgba(255,255,255,0.85);}
+.box-icon{font-size:1.1rem;margin-right:6px;}
+.box strong{color:inherit;}
+
+/* Supplier cards */
+.supplier-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.25rem 0;}
+.sup-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.1rem;}
+.sup-head{display:flex;align-items:center;gap:10px;margin-bottom:0.6rem;}
+.sup-icon{font-size:1.5rem;}
+.sup-name{font-family:var(--display);font-size:0.9rem;font-weight:700;}
+.sup-type{font-size:0.72rem;color:var(--muted);}
+.sup-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.6rem;}
+.tag{padding:2px 8px;border-radius:5px;font-size:0.68rem;font-weight:600;}
+.tag-free{background:rgba(170,255,87,0.1);color:var(--lime);}
+.tag-fast{background:rgba(0,212,255,0.1);color:var(--cyan);}
+.tag-usa{background:rgba(91,63,255,0.12);color:#a080ff;}
+.tag-eu{background:rgba(255,225,53,0.1);color:var(--yellow);}
+.sup-desc{font-size:0.8rem;color:var(--muted);line-height:1.5;}
+
+/* Profit table */
+.profit-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.85rem;}
+.profit-table th{text-align:left;padding:8px 12px;background:rgba(255,255,255,0.04);border-bottom:1px solid var(--border);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);}
+.profit-table td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.04);}
+.profit-table tr:last-child td{border-bottom:none;}
+.profit-table .green{color:var(--lime);font-weight:600;}
+.profit-table .red{color:var(--coral);}
+
+/* Platform comparison */
+.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.25rem 0;}
+.plat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;}
+.plat-name{font-family:var(--display);font-size:0.9rem;font-weight:700;margin-bottom:0.3rem;}
+.plat-fee{font-size:0.78rem;color:var(--coral);margin-bottom:0.5rem;}
+.plat-pros{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+
+/* Checklist */
+.checklist{list-style:none;padding:0;margin:1rem 0;}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.88rem;}
+.checklist li:last-child{border-bottom:none;}
+.check{color:var(--lime);font-size:1rem;flex-shrink:0;margin-top:2px;}
+.uncheck{color:var(--muted);font-size:1rem;flex-shrink:0;margin-top:2px;}
+
+/* Responsive */
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{position:relative;height:auto;}
+  .main{padding:2rem 1.25rem 4rem;}
+  .supplier-grid,.platform-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">⚡ <span>DropShip Guide</span></div>
+  <div class="nav-section">Getting Started</div>
+  <a class="nav-item active" href="#overview">Overview</a>
+  <a class="nav-item" href="#setup">1. Set Up Your Shop</a>
+  <a class="nav-item" href="#products">2. Add Products</a>
+  <a class="nav-item" href="#stripe">3. Connect Stripe</a>
+  <a class="nav-item" href="#deploy">4. Go Live (Netlify)</a>
+  <div class="nav-section">Running the Business</div>
+  <a class="nav-item" href="#suppliers">Choosing Suppliers</a>
+  <a class="nav-item" href="#usa">Selling in the USA</a>
+  <a class="nav-item" href="#global">Global Shipping</a>
+  <a class="nav-item" href="#orders">Handling Orders</a>
+  <a class="nav-item" href="#pricing">Setting Prices</a>
+  <a class="nav-item" href="#marketing">Getting Customers</a>
+  <div class="nav-section">Reference</div>
+  <a class="nav-item" href="#legal">Legal & Tax (USA)</a>
+  <a class="nav-item" href="#checklist">Launch Checklist</a>
+  <a class="nav-item" href="#faq">FAQ</a>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- OVERVIEW -->
+  <div id="overview" class="section">
+    <div class="eyebrow">Complete Guide</div>
+    <h1>How to Run Your Dropshipping Shop</h1>
+    <div class="intro-meta">
+      <div class="meta-pill">🌍 USA & Global Focus</div>
+      <div class="meta-pill">💳 Stripe Payments</div>
+      <div class="meta-pill">📦 Zero Stock Model</div>
+      <div class="meta-pill">⏱ 30 min to launch</div>
+    </div>
+    <p>This guide walks you through everything — from setting up your shop file to making your first sale in the USA and shipping worldwide. Your shop is a single HTML file that works as both your storefront and your admin dashboard.</p>
+
+    <div class="box box-success">
+      <span class="box-icon">✅</span><strong>How dropshipping works in one sentence:</strong> A customer pays you → you forward the order to your supplier → the supplier ships directly to your customer → you keep the difference.
+    </div>
+
+    <h3>The business model</h3>
+    <table class="profit-table">
+      <thead><tr><th>Example Product</th><th>Supplier Cost</th><th>You Sell For</th><th>Your Profit</th><th>Margin</th></tr></thead>
+      <tbody>
+        <tr><td>Wireless Earbuds</td><td>$8.00</td><td>$29.99</td><td class="green">$21.99</td><td class="green">73%</td></tr>
+        <tr><td>LED Desk Lamp</td><td>$12.00</td><td>$39.99</td><td class="green">$27.99</td><td class="green">70%</td></tr>
+        <tr><td>Skincare Kit</td><td>$7.00</td><td>$24.99</td><td class="green">$17.99</td><td class="green">72%</td></tr>
+        <tr><td>Fashion Tote Bag</td><td>$5.00</td><td>$19.99</td><td class="green">$14.99</td><td class="green">75%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SETUP -->
+  <div id="setup" class="section">
+    <div class="eyebrow">Step 1</div>
+    <h2>Set Up Your Shop</h2>
+    <p>Your shop is the <code>my-shop.html</code> file. It contains your public storefront AND your admin dashboard — everything in one file.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:rgba(91,63,255,0.2);color:#a080ff">1</div>
+        <div class="step-body">
+          <h4>Open your shop file</h4>
+          <p>Double-click <code>my-shop.html</code> in your browser. You'll see your storefront. Click <strong>⚙ Admin</strong> in the nav to access your dashboard.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,225,53,0.15);color:var(--yellow)">2</div>
+        <div class="step-body">
+          <h4>Name your shop</h4>
+          <p>In Admin → <strong>Shop Settings</strong> — enter your shop name, hero headline, and subheading. This appears on your storefront instantly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(170,255,87,0.1);color:var(--lime)">3</div>
+        <div class="step-body">
+          <h4>Everything saves automatically</h4>
+          <p>Your products, orders, and payments are saved in your browser's local storage. When you deploy online (Step 4), customers see your storefront but can't access your admin.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <span class="box-icon">⚠️</span><strong>Important:</strong> Local storage is browser-specific. If you switch browsers or clear cache, data won't transfer. Once deployed to Netlify, your store is live — but you'll always manage it from your own device where you set it up.
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div id="products" class="section">
+    <div class="eyebrow">Step 2</div>
+    <h2>Add Products</h2>
+    <p>Go to <strong>Admin → Products → + Add Product</strong>. Here's what to fill in:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,61,61,0.15);color:var(--coral)">📦</div>
+        <div class="step-body">
+          <h4>Product Name & Description</h4>
+          <p>Write a clear name (e.g. "Pro Noise-Cancelling Earbuds") and a short description focused on benefits. Good descriptions increase conversions.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(0,212,255,0.1);color:var(--cyan)">💰</div>
+        <div class="step-body">
+          <h4>Set your price</h4>
+          <p>Enter the supplier cost and your selling price. Aim for at least <strong>60–70% margin</strong> to cover ad spend and fees. Use the <strong>Profit Calculator</strong> in Admin to check before listing.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(170,255,87,0.1);color:var(--lime)">🔗</div>
+        <div class="step-body">
+          <h4>Add a Stripe Payment Link</h4>
+          <p>Create a payment link in your Stripe Dashboard first (see Step 3), then paste the URL here. When customers click "Buy Now" they go straight to Stripe checkout.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Where to find winning products</h3>
+    <ul>
+      <li><strong>AliExpress Dropshipping Center</strong> (aliexpress.com/dropshipping) — shows trending products with sales data</li>
+      <li><strong>CJ Dropshipping</strong> (cjdropshipping.com) — filter by "Hot Products" and USA warehouse stock</li>
+      <li><strong>TikTok</strong> — search #TikTokMadeMeBuyIt for viral products people are already buying</li>
+      <li><strong>Amazon Best Sellers</strong> — see what's hot, then find the same/similar on AliExpress cheaper</li>
+      <li><strong>AutoDS</strong> (autods.com) — paid tool that scrapes winning products daily</li>
+    </ul>
+  </div>
+
+  <!-- STRIPE -->
+  <div id="stripe" class="section">
+    <div class="eyebrow">Step 3</div>
+    <h2>Connect Stripe Payments</h2>
+    <p>Stripe is how you get paid. It handles credit cards, debit cards, Apple Pay, Google Pay — everything. It's trusted, fast, and used by millions of businesses.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:rgba(91,63,255,0.2);color:#a080ff">1</div>
+        <div class="step-body">
+          <h4>Create your Stripe account</h4>
+          <p>Go to <strong>stripe.com</strong> → Sign up. You'll need your email, a phone number, and your bank details to receive payouts. Takes about 10 minutes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(91,63,255,0.2);color:#a080ff">2</div>
+        <div class="step-body">
+          <h4>Verify your identity</h4>
+          <p>Stripe requires ID verification (passport or driving licence) before you can receive payouts. Do this immediately so you're not blocked when sales come in.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(91,63,255,0.2);color:#a080ff">3</div>
+        <div class="step-body">
+          <h4>Create a Payment Link per product</h4>
+          <p>Stripe Dashboard → <strong>Payment Links → + New</strong> → set the product name and price → Create → copy the <code>buy.stripe.com/…</code> URL → paste it into your product in Admin.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(91,63,255,0.2);color:#a080ff">4</div>
+        <div class="step-body">
+          <h4>Save your API keys</h4>
+          <p>Stripe Dashboard → Developers → API Keys → copy your Publishable key → paste it in Admin → Stripe & Payments → Save.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-info">
+      <span class="box-icon">💡</span><strong>Stripe fees:</strong> Stripe charges <strong>2.9% + 30¢ per transaction</strong> in the USA. On a $29.99 sale that's about $1.17 — factor this into your pricing. Use the Profit Calculator in Admin.
+    </div>
+
+    <h3>When you get paid</h3>
+    <p>Stripe pays out to your bank account on a rolling 2-day delay (after your first 7-day waiting period). So if someone buys today, the money lands in your bank in about 2–7 days depending on your account age.</p>
+  </div>
+
+  <!-- DEPLOY -->
+  <div id="deploy" class="section">
+    <div class="eyebrow">Step 4</div>
+    <h2>Go Live on the Internet (Netlify)</h2>
+    <p>Right now your shop only works on your computer. To make it live so US customers can visit it, you need to host it online. <strong>Netlify is free and takes 2 minutes.</strong></p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:rgba(170,255,87,0.12);color:var(--lime)">1</div>
+        <div class="step-body">
+          <h4>Go to app.netlify.com</h4>
+          <p>Sign up free with Google or GitHub. No card needed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(170,255,87,0.12);color:var(--lime)">2</div>
+        <div class="step-body">
+          <h4>Drag and drop your file</h4>
+          <p>On the Netlify dashboard, find the <strong>"Deploy manually"</strong> area. Drag your <code>my-shop.html</code> file onto it. Done.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(170,255,87,0.12);color:var(--lime)">3</div>
+        <div class="step-body">
+          <h4>You get a live URL instantly</h4>
+          <p>Netlify gives you a URL like <code>jolly-fox-abc123.netlify.app</code>. Share this with customers. It loads your storefront.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(170,255,87,0.12);color:var(--lime)">4</div>
+        <div class="step-body">
+          <h4>Get a custom domain (optional but recommended)</h4>
+          <p>Buy a <code>.com</code> domain from <strong>Namecheap</strong> (~$10/year) or <strong>GoDaddy</strong>. In Netlify → Domain Settings → add custom domain → follow DNS instructions. Looks far more professional to US customers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <span class="box-icon">⚠️</span><strong>Important:</strong> When deployed online, your store's products (added via Admin) are saved in <em>your local browser</em> — not on the server. Your storefront shows what's in your local browser's storage. To keep products in sync, always manage the shop from the same device and browser you set it up on. For a more advanced setup later, consider a backend like Supabase (you've already used this for ClientTech).
+    </div>
+  </div>
+
+  <!-- SUPPLIERS -->
+  <div id="suppliers" class="section">
+    <div class="eyebrow">Running the Business</div>
+    <h2>Choosing the Right Suppliers</h2>
+    <p>For US and global selling, supplier choice matters a lot. Shipping time is the #1 complaint from US customers. Here's what to use:</p>
+
+    <div class="supplier-grid">
+      <div class="sup-card">
+        <div class="sup-head"><div class="sup-icon">📦</div><div><div class="sup-name">CJ Dropshipping</div><div class="sup-type">Best for USA — cjdropshipping.com</div></div></div>
+        <div class="sup-tags"><span class="tag tag-free">Free</span><span class="tag tag-usa">USA Warehouse</span><span class="tag tag-fast">5–8 days</span></div>
+        <div class="sup-desc">Has a US warehouse — meaning products ship domestically in the USA in 5–8 days. This is crucial for American customers who expect Amazon-like speed. Free to join, free API. <strong>Use this first.</strong></div>
+      </div>
+      <div class="sup-card">
+        <div class="sup-head"><div class="sup-icon">⚡</div><div><div class="sup-name">Zendrop</div><div class="sup-type">Auto-fulfilment — zendrop.com</div></div></div>
+        <div class="sup-tags"><span class="tag tag-free">Free Plan</span><span class="tag tag-usa">US Stock</span><span class="tag tag-fast">3–7 days</span></div>
+        <div class="sup-desc">Strong US inventory, automatic fulfilment (orders sent to them automatically), and faster shipping than AliExpress. Great for scaling. Free plan available.</div>
+      </div>
+      <div class="sup-card">
+        <div class="sup-head"><div class="sup-icon">🎨</div><div><div class="sup-name">Printful</div><div class="sup-type">Print on demand — printful.com</div></div></div>
+        <div class="sup-tags"><span class="tag tag-usa">USA Based</span><span class="tag tag-fast">3–5 days</span></div>
+        <div class="sup-desc">Perfect for fashion/accessories with your own branding. Prints and ships from US facilities. High margins on branded clothing. Great for building a recognisable brand.</div>
+      </div>
+      <div class="sup-card">
+        <div class="sup-head"><div class="sup-icon">🛍️</div><div><div class="sup-name">AliExpress / DSers</div><div class="sup-type">Huge range — aliexpress.com</div></div></div>
+        <div class="sup-tags"><span class="tag tag-free">Free</span><span class="tag tag-eu">10–20 days</span></div>
+        <div class="sup-desc">Massive product range but slower shipping (10–20 days to USA). Use AliExpress for product research and testing, then switch to CJ or Zendrop once a product proves popular.</div>
+      </div>
+      <div class="sup-card">
+        <div class="sup-head"><div class="sup-icon">🌿</div><div><div class="sup-name">Spocket</div><div class="sup-type">US & EU suppliers — spocket.co</div></div></div>
+        <div class="sup-tags"><span class="tag tag-usa">US Suppliers</span><span class="tag tag-fast">2–5 days</span></div>
+        <div class="sup-desc">Connects you with US-based suppliers directly. Higher quality products, faster shipping. Premium pricing but higher perceived value — works well for beauty and home niches.</div>
+      </div>
+      <div class="sup-card">
+        <div class="sup-head"><div class="sup-icon">🏭</div><div><div class="sup-name">SaleHoo</div><div class="sup-type">Wholesale directory — salehoo.com</div></div></div>
+        <div class="sup-tags"><span class="tag tag-usa">USA Options</span></div>
+        <div class="sup-desc">Directory of vetted US and global suppliers. Good for finding niche products not on AliExpress. Paid membership but worth it once you're scaling.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USA SELLING -->
+  <div id="usa" class="section">
+    <h2>Selling in the USA 🇺🇸</h2>
+    <p>The US is the world's biggest e-commerce market. Here's exactly what you need to know:</p>
+
+    <h3>Pricing in USD</h3>
+    <p>Your shop is already set to show <strong>$ prices</strong>. When setting prices, research what similar products sell for on Amazon US and price 10–30% below to be competitive.</p>
+
+    <h3>Shipping expectations</h3>
+    <div class="box box-warn">
+      <span class="box-icon">⚠️</span>American customers <strong>expect delivery in 5–10 days</strong>. Anything longer causes complaints and refund requests. Always use CJ Dropshipping's US warehouse or Zendrop for US orders. Never use standard AliExpress shipping (15–30 days) for US customers.
+    </div>
+
+    <h3>Top-selling niches in the USA right now</h3>
+    <ul>
+      <li>🏠 <strong>Home & kitchen gadgets</strong> — US homes are large, people love home products</li>
+      <li>💪 <strong>Fitness & wellness</strong> — massive market, especially post-COVID</li>
+      <li>🐕 <strong>Pet accessories</strong> — Americans spend $150B/year on pets</li>
+      <li>👶 <strong>Baby & kids products</strong> — parents buy constantly, repeat customers</li>
+      <li>💄 <strong>Beauty & skincare</strong> — huge TikTok-driven demand</li>
+      <li>📱 <strong>Phone accessories</strong> — high volume, cheap to ship, easy impulse buy</li>
+    </ul>
+
+    <h3>How to accept USD via Stripe</h3>
+    <p>Stripe automatically handles currency conversion. When you set up a Payment Link in Stripe, set the price in <strong>USD ($)</strong>. Stripe deposits the equivalent in your local currency (after conversion) into your bank account.</p>
+
+    <h3>Returns & customer service</h3>
+    <ul>
+      <li>Offer a clear <strong>30-day return policy</strong> — US customers expect this</li>
+      <li>Set up a <strong>contact email</strong> (use Gmail to start) and respond within 24 hours</li>
+      <li>For disputes/refunds: most suppliers will resend or refund you if the product is faulty</li>
+      <li>Use <strong>Stripe's built-in dispute handling</strong> for chargebacks</li>
+    </ul>
+  </div>
+
+  <!-- GLOBAL -->
+  <div id="global" class="section">
+    <h2>Selling Globally 🌍</h2>
+    <p>After the USA, the next biggest English-speaking markets are Canada, Australia, and the UK. Here's how to handle each:</p>
+
+    <table class="profit-table">
+      <thead><tr><th>Market</th><th>Currency</th><th>Best Supplier</th><th>Avg Shipping</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>🇺🇸 USA</td><td>USD $</td><td>CJ / Zendrop</td><td>5–8 days</td><td>Biggest market, prioritise</td></tr>
+        <tr><td>🇨🇦 Canada</td><td>CAD $</td><td>CJ / AliExpress</td><td>8–15 days</td><td>Similar to USA, high spend</td></tr>
+        <tr><td>🇦🇺 Australia</td><td>AUD $</td><td>CJ / Spocket</td><td>10–15 days</td><td>High average order value</td></tr>
+        <tr><td>🇬🇧 UK</td><td>GBP £</td><td>Spocket / CJ</td><td>3–7 days</td><td>Post-Brexit customs apply</td></tr>
+        <tr><td>🇩🇪🇫🇷 Europe</td><td>EUR €</td><td>Spocket</td><td>5–10 days</td><td>Spocket has EU warehouses</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Multi-currency tip</h3>
+    <p>Create separate Stripe Payment Links in each currency (USD, GBP, AUD etc.) for each product. Stripe supports this natively. You can add links per currency in Admin → Stripe & Payments.</p>
+
+    <div class="box box-info">
+      <span class="box-icon">💡</span><strong>Start with just USA.</strong> Once you're making consistent sales, expand to Canada and Australia. They have similar buying behaviour and accept USD pricing too.
+    </div>
+  </div>
+
+  <!-- ORDERS -->
+  <div id="orders" class="section">
+    <h2>Handling Orders Day-to-Day</h2>
+    <p>Here's your exact workflow every time a customer orders:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:rgba(0,212,255,0.1);color:var(--cyan)">1</div>
+        <div class="step-body">
+          <h4>Customer pays via Stripe</h4>
+          <p>You get an email from Stripe confirming payment. The money is in your Stripe account immediately (hits your bank in 2 days).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(0,212,255,0.1);color:var(--cyan)">2</div>
+        <div class="step-body">
+          <h4>Log the order in Admin</h4>
+          <p>Go to Admin → Orders → + Log Order. Enter the customer name, product, your sale price, and what you paid the supplier. This tracks your profit.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(0,212,255,0.1);color:var(--cyan)">3</div>
+        <div class="step-body">
+          <h4>Place the order with your supplier</h4>
+          <p>Go to your supplier's website (CJ, Zendrop, etc.), place the order with the <strong>customer's shipping address</strong>. Pay the supplier cost from your Stripe funds.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(0,212,255,0.1);color:var(--cyan)">4</div>
+        <div class="step-body">
+          <h4>Send the customer their tracking number</h4>
+          <p>Your supplier gives you a tracking number. Email it to your customer. This prevents "where's my order?" messages and builds trust.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:rgba(0,212,255,0.1);color:var(--cyan)">5</div>
+        <div class="step-body">
+          <h4>Update the order status in Admin</h4>
+          <p>Change the order status from Processing → Shipped → Delivered. Also log the payment in Admin → Stripe & Payments with the Stripe payment reference from your Stripe dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div id="pricing" class="section">
+    <h2>Setting the Right Prices</h2>
+    <p>Use this formula for every product before you list it:</p>
+
+    <div class="box box-success">
+      <strong>Your Price = (Supplier Cost × 3) minimum</strong><br>
+      Example: Supplier cost $8 → Sell for at least $24.99<br>
+      This covers Stripe fees (2.9%), ad spend, and still leaves ~60% margin.
+    </div>
+
+    <h3>Costs to account for</h3>
+    <table class="profit-table">
+      <thead><tr><th>Cost</th><th>Amount</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Supplier product cost</td><td>Variable</td><td>What you pay CJ/AliExpress etc.</td></tr>
+        <tr><td>Shipping to customer</td><td>$0–5</td><td>Often included in supplier price. Offer free shipping to customers.</td></tr>
+        <tr><td>Stripe transaction fee</td><td>2.9% + $0.30</td><td>Deducted automatically from each payment</td></tr>
+        <tr><td>Ad spend (if using ads)</td><td>$1–5/sale</td><td>Facebook/TikTok ads — optional but helps scale</td></tr>
+        <tr><td>Netlify hosting</td><td>$0</td><td>Free tier covers most shops</td></tr>
+        <tr><td>Domain name</td><td>~$10/year</td><td>Namecheap.com</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Platforms to also sell on (beyond your shop)</h3>
+    <div class="platform-grid">
+      <div class="plat-card">
+        <div class="plat-name">eBay</div>
+        <div class="plat-fee">Fee: ~13%</div>
+        <div class="plat-pros">Huge US buyer base. Easy to start. List your products and eBay brings traffic. No ad spend needed.</div>
+      </div>
+      <div class="plat-card">
+        <div class="plat-name">Etsy</div>
+        <div class="plat-fee">Fee: 6.5% + listing</div>
+        <div class="plat-pros">Great for fashion, beauty, home décor. US buyers trust Etsy. Works especially well with Printful.</div>
+      </div>
+      <div class="plat-card">
+        <div class="plat-name">Facebook Shop</div>
+        <div class="plat-fee">Fee: 5%</div>
+        <div class="plat-pros">Free to set up. Connect your products. Great for reaching US buyers through Facebook Marketplace.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARKETING -->
+  <div id="marketing" class="section">
+    <h2>Getting Customers</h2>
+    <p>Having a shop isn't enough — you need to drive traffic to it. Here's what actually works for US dropshipping:</p>
+
+    <h3>Free methods (start here)</h3>
+    <ul>
+      <li><strong>TikTok organic</strong> — Film short videos showing your product in use. No face needed. Trending sounds + product demo = viral potential. US TikTok has huge buying intent.</li>
+      <li><strong>Instagram Reels</strong> — Same content as TikTok. Post your product videos as Reels. Add your shop link in bio.</li>
+      <li><strong>Facebook Groups</strong> — Join US buy/sell groups relevant to your niche. Post your products genuinely.</li>
+      <li><strong>Pinterest</strong> — Great for home, fashion, beauty. Americans browse Pinterest for shopping inspiration. Free traffic.</li>
+      <li><strong>Reddit</strong> — Post in relevant subreddits (r/deals, r/frugal, niche subs). Be helpful, not spammy.</li>
+    </ul>
+
+    <h3>Paid methods (once you're profitable)</h3>
+    <ul>
+      <li><strong>TikTok Ads</strong> — Spark Ads (boosting organic videos) work best. Start with $20/day budget targeting USA. Best ROI in e-commerce right now.</li>
+      <li><strong>Facebook/Instagram Ads</strong> — Detailed US targeting. Start with $10/day. Use video ads. Test 3–5 products and double down on what works.</li>
+      <li><strong>Google Shopping Ads</strong> — Intent-based. People searching "buy wireless earbuds" are ready to purchase. Higher conversion rate.</li>
+    </ul>
+
+    <div class="box box-info">
+      <span class="box-icon">💡</span><strong>Best free strategy:</strong> Post 3 TikTok videos per day showing your products. One of them will go viral eventually. When it does, make sure your Stripe payment link is in your bio. This is how many dropshippers make their first $1,000.
+    </div>
+  </div>
+
+  <!-- LEGAL -->
+  <div id="legal" class="section">
+    <h2>Legal & Tax (USA Sales)</h2>
+
+    <div class="box box-warn">
+      <span class="box-icon">⚠️</span>This is general guidance, not legal advice. Consult an accountant for your specific situation.
+    </div>
+
+    <h3>Do you need a US company?</h3>
+    <p>No — you can sell to US customers from outside the USA using Stripe. However, once you're making consistent revenue, consider forming a <strong>US LLC</strong> (especially a Wyoming or Delaware LLC) which can reduce taxes and increase customer trust. Services like <strong>Stripe Atlas</strong> or <strong>Northwest Registered Agent</strong> can set one up for ~$100.</p>
+
+    <h3>US Sales Tax</h3>
+    <p>Sales tax in the USA is complex — it varies by state. As a non-US seller with no physical presence in the US, you generally don't need to collect sales tax until you hit <strong>economic nexus thresholds</strong> (usually $100,000 in sales or 200 transactions per state). When you reach that level, use <strong>TaxJar</strong> or <strong>Avalara</strong> to automate it. Stripe can also collect and remit tax automatically via <strong>Stripe Tax</strong>.</p>
+
+    <h3>Income tax</h3>
+    <p>Profit from your shop is taxable income in your home country. Keep records of all revenue, supplier costs, and fees. Talk to an accountant once you're earning consistently.</p>
+
+    <h3>Business registration</h3>
+    <p>In the UK, if this is your main business, register as a Sole Trader with HMRC (free, takes 10 minutes at gov.uk). Once over the VAT threshold (£90,000/year), register for VAT.</p>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div id="checklist" class="section">
+    <h2>Launch Checklist ✅</h2>
+    <p>Go through this before you consider yourself live:</p>
+
+    <ul class="checklist">
+      <li><span class="check">☐</span>Shop name set in Admin → Settings</li>
+      <li><span class="check">☐</span>At least 5 products added with descriptions and prices</li>
+      <li><span class="check">☐</span>Each product has a Stripe payment link</li>
+      <li><span class="check">☐</span>Stripe account created and identity verified</li>
+      <li><span class="check">☐</span>Stripe payout bank account connected</li>
+      <li><span class="check">☐</span>Shop deployed to Netlify (or other host)</li>
+      <li><span class="check">☐</span>Custom domain connected (recommended)</li>
+      <li><span class="check">☐</span>Tested checkout: clicked Buy Now → Stripe page opens → price is correct in USD</li>
+      <li><span class="check">☐</span>Supplier account created (CJ Dropshipping minimum)</li>
+      <li><span class="check">☐</span>Test order placed with supplier to check shipping speed</li>
+      <li><span class="check">☐</span>Contact email set up (shopname@gmail.com is fine to start)</li>
+      <li><span class="check">☐</span>Social media account created (TikTok + Instagram minimum)</li>
+      <li><span class="check">☐</span>First product video filmed and posted</li>
+      <li><span class="check">☐</span>Profit Calculator checked — all products have 60%+ margin after Stripe fees</li>
+    </ul>
+  </div>
+
+  <!-- FAQ -->
+  <div id="faq" class="section">
+    <h2>FAQ</h2>
+
+    <h3>Do I need to hold any stock?</h3>
+    <p>No. That's the whole point of dropshipping. You only buy from the supplier <em>after</em> the customer pays you.</p>
+
+    <h3>What if a customer wants a refund?</h3>
+    <p>Issue a refund via Stripe (takes 2 clicks). For the supplier cost: most suppliers will refund or resend if the item is faulty or didn't arrive. For "changed my mind" returns, you don't have to refund the original shipping but it's good practice.</p>
+
+    <h3>How long does shipping take?</h3>
+    <p>Using CJ Dropshipping's US warehouse: 5–8 days. Zendrop: 3–7 days. Standard AliExpress to USA: 15–30 days (avoid this for US customers).</p>
+
+    <h3>Can I run this alongside another job?</h3>
+    <p>Yes. Most dropshippers start part-time. Order fulfilment takes 15–30 minutes a day once you have a system. Scale to full-time once revenue justifies it.</p>
+
+    <h3>What if someone copies my shop?</h3>
+    <p>They can copy the look, but your supplier relationships, customer base, and brand reputation are yours. Focus on building a brand rather than just selling generic products.</p>
+
+    <h3>How do I handle US customer service from the UK?</h3>
+    <p>Email is fine — US/UK time difference means you can respond to morning US emails in your evening. Aim to respond within 24 hours. Use a Gmail auto-responder to confirm receipt of messages immediately.</p>
+
+    <h3>Should I use my real name/address on the shop?</h3>
+    <p>You need a contact email but not a physical address to start. Once you form a company, use the registered address. Never use your home address publicly.</p>
+
+    <div class="box box-success" style="margin-top:2rem">
+      <span class="box-icon">🚀</span><strong>You're ready.</strong> Open your <code>my-shop.html</code> file, set up your shop name, add 5 products, connect Stripe, and deploy to Netlify. Your first sale is closer than you think.
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+// Highlight active nav item on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navItems = document.querySelectorAll('.nav-item');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navItems.forEach(n => {
+    n.classList.remove('active');
+    if (n.getAttribute('href') === '#' + current) n.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Shop — DropShip Hub</title>
+<meta name="description" content="Shop the best products across fashion, electronics, home and beauty.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#05070F; --navy2:#0C0F1E; --navy3:#12162B;
+  --indigo:#5B3FFF; --indigo2:#7B63FF;
+  --coral:#FF3D3D; --yellow:#FFE135; --cyan:#00D4FF; --lime:#AAFF57;
+  --white:#FFFFFF; --muted:#7A7A9A; --border:rgba(255,255,255,0.08);
+  --glass:rgba(255,255,255,0.04); --card:#1A1A2E;
+  --display:'Space Grotesk',sans-serif; --body:'DM Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:var(--body);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+input,select,textarea,button{font-family:var(--body);}
+
+/* ═══════════════ SHARED ═══════════════ */
+.page{display:none;}
+.page.active{display:block;}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:10px;cursor:pointer;font-weight:600;transition:all 0.2s;white-space:nowrap;}
+.btn-primary{background:var(--indigo);color:#fff;padding:10px 22px;font-size:0.875rem;}
+.btn-primary:hover{background:#4a2ef0;transform:translateY(-1px);}
+.btn-coral{background:var(--coral);color:#fff;padding:10px 22px;font-size:0.875rem;}
+.btn-coral:hover{background:#d42f2f;}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--white);padding:10px 20px;font-size:0.875rem;}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.25);background:var(--glass);}
+.btn-lime{background:var(--lime);color:#000;padding:10px 22px;font-size:0.875rem;font-weight:700;}
+.btn-lime:hover{background:#90e040;}
+.badge{display:inline-block;padding:3px 10px;border-radius:5px;font-size:0.7rem;font-weight:600;}
+.badge-processing{background:rgba(255,225,53,0.12);color:var(--yellow);}
+.badge-shipped{background:rgba(0,212,255,0.1);color:var(--cyan);}
+.badge-delivered{background:rgba(170,255,87,0.1);color:var(--lime);}
+.badge-cancelled{background:rgba(255,61,61,0.1);color:var(--coral);}
+.badge-paid{background:rgba(170,255,87,0.1);color:var(--lime);}
+.badge-pending{background:rgba(255,225,53,0.1);color:var(--yellow);}
+.badge-refunded{background:rgba(255,61,61,0.1);color:var(--coral);}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--lime);border-radius:10px;padding:0.9rem 1.25rem;font-size:0.85rem;z-index:9999;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center;}
+.modal-bg.open{display:flex;}
+.modal{background:#0e1120;border:1px solid var(--border);border-radius:18px;padding:2rem;width:90%;max-width:480px;animation:fadeUp 0.25s ease;max-height:90vh;overflow-y:auto;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal-title{font-family:var(--display);font-size:1.2rem;font-weight:700;margin-bottom:0.4rem;}
+.modal-sub{color:var(--muted);font-size:0.83rem;margin-bottom:1.5rem;}
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:0.75rem;color:var(--muted);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
+.field input,.field select,.field textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:9px;padding:10px 13px;color:var(--white);font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--indigo);}
+.field select option{background:#0e1120;}
+.field textarea{resize:vertical;min-height:70px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+.modal-actions{display:flex;gap:0.75rem;margin-top:1.25rem;}
+.modal-actions .btn-primary{flex:1;justify-content:center;padding:11px;}
+.modal-actions .btn-ghost{padding:11px 18px;}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--muted);}
+.empty-state .ei{font-size:3rem;margin-bottom:1rem;}
+
+/* ═══════════════ NAV ═══════════════ */
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,7,15,0.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:66px;}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:1.15rem;font-weight:700;cursor:pointer;}
+.nav-logo-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--indigo),var(--coral));display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.nav-center{display:flex;gap:0.25rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:3px;}
+.nav-tab{padding:6px 16px;border-radius:7px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:0.82rem;font-weight:500;transition:all 0.2s;}
+.nav-tab.active{background:var(--indigo);color:#fff;}
+.nav-tab:hover:not(.active){color:var(--white);}
+.nav-right{display:flex;gap:0.75rem;align-items:center;}
+.cart-pill{display:flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:7px 14px;cursor:pointer;font-size:0.83rem;font-weight:600;transition:all 0.2s;}
+.cart-pill:hover{border-color:var(--indigo);}
+.cart-dot{background:var(--coral);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;}
+
+/* ═══════════════ STOREFRONT ═══════════════ */
+#page-store{padding-top:66px;}
+
+/* Store Hero */
+.store-hero{padding:5rem 2rem 4rem;text-align:center;background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(91,63,255,0.18) 0%,transparent 65%);border-bottom:1px solid var(--border);}
+.store-hero h1{font-family:var(--display);font-size:clamp(2.2rem,5vw,4rem);font-weight:700;letter-spacing:-0.03em;line-height:1.05;margin-bottom:0.75rem;}
+.store-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--yellow),var(--coral),var(--indigo2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.store-hero p{color:var(--muted);font-size:1rem;max-width:440px;margin:0 auto 2rem;line-height:1.6;}
+.store-trust{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--muted);}
+
+/* Category tabs */
+.cat-bar{padding:1.25rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;background:rgba(12,15,30,0.6);}
+.cat-chip{padding:7px 18px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:0.8rem;font-weight:500;transition:all 0.2s;}
+.cat-chip.active{background:var(--indigo);border-color:var(--indigo);color:#fff;}
+.cat-chip:hover:not(.active){color:var(--white);border-color:rgba(255,255,255,0.2);}
+.cat-search{margin-left:auto;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:9px;padding:8px 14px;}
+.cat-search input{background:transparent;border:none;outline:none;color:var(--white);font-size:0.85rem;width:180px;}
+.cat-search input::placeholder{color:var(--muted);}
+
+/* Products grid */
+.products-wrap{padding:2rem;max-width:1280px;margin:0 auto;}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem;}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.25s;}
+.product-card:hover{border-color:rgba(91,63,255,0.5);transform:translateY(-3px);box-shadow:0 12px 40px rgba(91,63,255,0.12);}
+.pc-thumb{height:170px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;}
+.pc-new{position:absolute;top:10px;left:10px;background:var(--coral);color:#fff;border-radius:5px;padding:2px 9px;font-size:0.68rem;font-weight:700;}
+.pc-body{padding:1rem;}
+.pc-niche{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;}
+.pc-name{font-weight:600;font-size:0.92rem;margin-bottom:5px;line-height:1.3;}
+.pc-desc{font-size:0.77rem;color:var(--muted);margin-bottom:8px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.pc-price-row{display:flex;justify-content:space-between;align-items:center;}
+.pc-price{font-family:var(--display);font-size:1.25rem;font-weight:700;}
+.pc-ship{font-size:0.7rem;color:var(--muted);}
+.pc-actions{padding:0.75rem 1rem;border-top:1px solid var(--border);display:flex;gap:0.5rem;}
+.pc-btn-buy{flex:1;padding:9px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--indigo),var(--coral));color:#fff;font-weight:700;font-size:0.83rem;cursor:pointer;transition:opacity 0.2s;}
+.pc-btn-buy:hover{opacity:0.88;}
+.pc-btn-peek{padding:9px 13px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--white);cursor:pointer;font-size:0.9rem;transition:all 0.2s;}
+.pc-btn-peek:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* ═══════════════ CART SIDEBAR ═══════════════ */
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:200;}
+.cart-overlay.open{display:block;}
+.cart-sidebar{position:fixed;top:0;right:0;bottom:0;width:380px;background:#0a0d1a;border-left:1px solid var(--border);z-index:201;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);}
+.cart-sidebar.open{transform:translateX(0);}
+.cart-head{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-head-title{font-family:var(--display);font-size:1.1rem;font-weight:700;}
+.cart-close{background:transparent;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;}
+.cart-close:hover{color:var(--white);}
+.cart-items{flex:1;overflow-y:auto;padding:1rem;}
+.cart-item{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:1rem;margin-bottom:0.75rem;display:flex;gap:12px;align-items:center;}
+.ci-emoji{font-size:2.2rem;flex-shrink:0;}
+.ci-info{flex:1;}
+.ci-name{font-weight:600;font-size:0.875rem;}
+.ci-price{color:var(--lime);font-weight:700;font-size:0.875rem;margin-top:2px;}
+.ci-qty{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.ci-qty button{width:24px;height:24px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--white);cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;}
+.ci-qty button:hover{background:var(--glass);}
+.ci-qty span{font-size:0.83rem;font-weight:600;min-width:20px;text-align:center;}
+.ci-remove{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:1rem;flex-shrink:0;}
+.ci-remove:hover{color:var(--coral);}
+.cart-foot{padding:1.25rem;border-top:1px solid var(--border);}
+.cart-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;font-size:0.875rem;color:var(--muted);}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;font-family:var(--display);font-size:1.15rem;font-weight:700;}
+.checkout-btn{width:100%;padding:13px;border-radius:11px;border:none;background:linear-gradient(90deg,var(--indigo),var(--coral));color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;transition:opacity 0.2s;}
+.checkout-btn:hover{opacity:0.9;}
+.cart-empty{text-align:center;color:var(--muted);padding:3rem 1rem;}
+
+/* Product detail modal */
+.prod-detail{background:#0a0d1a;border:1px solid var(--border);border-radius:20px;padding:0;width:90%;max-width:560px;animation:fadeUp 0.25s ease;overflow:hidden;}
+.pd-thumb{height:220px;display:flex;align-items:center;justify-content:center;font-size:6rem;}
+.pd-body{padding:1.75rem;}
+.pd-niche{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
+.pd-name{font-family:var(--display);font-size:1.5rem;font-weight:700;margin-bottom:0.75rem;letter-spacing:-0.02em;}
+.pd-desc{color:var(--muted);font-size:0.9rem;line-height:1.65;margin-bottom:1.25rem;}
+.pd-price{font-family:var(--display);font-size:2.2rem;font-weight:700;margin-bottom:0.4rem;}
+.pd-perks{display:flex;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.pd-perk{font-size:0.78rem;color:var(--muted);}
+.pd-actions{display:flex;gap:0.75rem;}
+.pd-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.08);border:none;border-radius:7px;color:var(--white);padding:6px 12px;cursor:pointer;font-size:0.83rem;}
+
+/* ═══════════════ ADMIN ═══════════════ */
+#page-admin{padding-top:66px;min-height:100vh;}
+.admin-wrap{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 66px);}
+.admin-sidebar{background:var(--navy2);border-right:1px solid var(--border);padding:1.5rem 0;}
+.admin-menu-item{display:flex;align-items:center;gap:10px;padding:10px 1.5rem;font-size:0.85rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;}
+.admin-menu-item:hover{color:var(--white);background:rgba(255,255,255,0.03);}
+.admin-menu-item.active{color:var(--white);background:rgba(91,63,255,0.1);border-left-color:var(--indigo);}
+.admin-menu-icon{font-size:1rem;width:20px;text-align:center;}
+.admin-content{padding:2rem;overflow-y:auto;}
+.admin-panel{display:none;}
+.admin-panel.active{display:block;}
+.admin-panel-title{font-family:var(--display);font-size:1.4rem;font-weight:700;margin-bottom:0.3rem;letter-spacing:-0.02em;}
+.admin-panel-sub{color:var(--muted);font-size:0.85rem;margin-bottom:1.75rem;}
+
+/* KPIs */
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:1.75rem;}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.1rem 1.25rem;position:relative;overflow:hidden;}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;}
+.kpi.k1::before{background:var(--coral);}
+.kpi.k2::before{background:var(--indigo);}
+.kpi.k3::before{background:var(--cyan);}
+.kpi.k4::before{background:var(--lime);}
+.kpi.k5::before{background:var(--yellow);}
+.kpi-label{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
+.kpi-val{font-family:var(--display);font-size:1.75rem;font-weight:700;margin:0.2rem 0;letter-spacing:-0.02em;}
+.kpi-sub{font-size:0.72rem;color:var(--muted);}
+
+/* Tables */
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.data-table{width:100%;border-collapse:collapse;}
+.data-table th{text-align:left;font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;padding:10px 14px;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);}
+.data-table td{padding:11px 14px;font-size:0.83rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);}
+.id-tag{font-family:var(--display);font-size:0.8rem;color:var(--cyan);}
+
+/* Section header row */
+.section-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.section-row-title{font-family:var(--display);font-size:1rem;font-weight:700;}
+
+/* Stripe setup card */
+.stripe-setup{background:linear-gradient(135deg,rgba(91,63,255,0.12),rgba(0,212,255,0.06));border:1px solid rgba(91,63,255,0.3);border-radius:16px;padding:1.75rem;margin-bottom:1.5rem;}
+.stripe-setup-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:1.25rem;}
+.stripe-setup-icon{font-size:2rem;flex-shrink:0;}
+.stripe-setup-title{font-family:var(--display);font-size:1.05rem;font-weight:700;margin-bottom:4px;}
+.stripe-setup-sub{font-size:0.83rem;color:#aaa;line-height:1.55;}
+.stripe-steps{display:flex;flex-direction:column;gap:0.6rem;}
+.ss{display:flex;align-items:flex-start;gap:10px;font-size:0.83rem;color:#bbb;}
+.ss-num{background:var(--indigo);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0;margin-top:1px;}
+.key-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem;}
+.key-box{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:11px;padding:1rem 1.25rem;}
+.key-label{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;}
+.key-row{display:flex;gap:0.5rem;}
+.key-input{flex:1;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:7px;padding:8px 12px;color:var(--white);font-family:monospace;font-size:0.8rem;outline:none;}
+.key-input:focus{border-color:var(--indigo);}
+.key-save{padding:8px 14px;border-radius:7px;border:none;background:var(--indigo);color:#fff;font-size:0.78rem;font-weight:600;cursor:pointer;}
+.key-status{font-size:0.72rem;margin-top:5px;}
+.key-status.ok{color:var(--lime);}
+.key-status.none{color:var(--muted);}
+
+/* Pay link builder */
+.plb{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;}
+.plb-title{font-family:var(--display);font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;}
+.plb-sub{font-size:0.8rem;color:var(--muted);margin-bottom:1rem;line-height:1.5;}
+.plb-grid{display:grid;grid-template-columns:1fr 100px 1fr auto;gap:0.75rem;align-items:end;}
+.plb-group{display:flex;flex-direction:column;gap:4px;}
+.plb-lbl{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;}
+.plb-input{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--white);font-size:0.85rem;outline:none;}
+.plb-input:focus{border-color:var(--indigo);}
+.pl-row{display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:0.5rem;gap:1rem;}
+.pl-name{font-size:0.85rem;font-weight:600;}
+.pl-url{font-size:0.73rem;color:var(--cyan);font-family:monospace;word-break:break-all;flex:1;}
+.pl-acts{display:flex;gap:0.4rem;flex-shrink:0;}
+.pl-btn{padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:0.73rem;cursor:pointer;}
+.pl-btn:hover{color:var(--white);}
+
+/* Select inline */
+.inline-sel{background:var(--card);border:1px solid var(--border);border-radius:7px;color:var(--white);padding:4px 8px;font-size:0.75rem;cursor:pointer;}
+
+/* Profit calc */
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.calc-result{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.calc-result-head{padding:0.9rem 1.25rem;background:linear-gradient(90deg,var(--indigo),var(--coral));font-family:var(--display);font-weight:700;font-size:0.9rem;}
+.calc-result-body{display:grid;grid-template-columns:repeat(3,1fr);}
+.crb-item{padding:1.1rem 1.25rem;border-right:1px solid var(--border);}
+.crb-item:last-child{border-right:none;}
+.crb-label{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
+.crb-val{font-family:var(--display);font-size:1.6rem;font-weight:700;margin-top:4px;}
+.crb-val.revenue{color:var(--cyan);}
+.crb-val.profit{color:var(--lime);}
+.crb-val.margin{color:var(--yellow);}
+
+/* ═══════════════ NICHE COLOURS ═══════════════ */
+.nc-Fashion .pc-niche,.nc-Fashion .pd-niche,.nc-Fashion .pc-price{color:#FF3D3D;}
+.nc-Fashion .pc-thumb,.nc-Fashion .pd-thumb{background:#150808;}
+.nc-Electronics .pc-niche,.nc-Electronics .pd-niche,.nc-Electronics .pc-price{color:#00D4FF;}
+.nc-Electronics .pc-thumb,.nc-Electronics .pd-thumb{background:#000d14;}
+.nc-Home .pc-niche,.nc-Home .pd-niche,.nc-Home .pc-price{color:#AAFF57;}
+.nc-Home .pc-thumb,.nc-Home .pd-thumb{background:#091200;}
+.nc-Beauty .pc-niche,.nc-Beauty .pd-niche,.nc-Beauty .pc-price{color:#FFE135;}
+.nc-Beauty .pc-thumb,.nc-Beauty .pd-thumb{background:#120f00;}
+
+/* Responsive */
+@media(max-width:900px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr);}
+  .admin-wrap{grid-template-columns:1fr;}
+  .admin-sidebar{display:flex;overflow-x:auto;padding:0.5rem;}
+  .admin-menu-item{border-left:none;border-bottom:3px solid transparent;white-space:nowrap;padding:8px 14px;}
+  .admin-menu-item.active{border-bottom-color:var(--indigo);border-left-color:transparent;}
+  .cart-sidebar{width:100%;}
+  .plb-grid{grid-template-columns:1fr 1fr;}
+  .key-grid{grid-template-columns:1fr;}
+  .field-row{grid-template-columns:1fr;}
+  .calc-grid{grid-template-columns:1fr;}
+  .calc-result-body{grid-template-columns:1fr;}
+  .crb-item{border-right:none;border-bottom:1px solid var(--border);}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ GLOBAL NAV ═══ -->
+<header class="site-nav">
+  <div class="nav-logo" onclick="showPage('store')">
+    <div class="nav-logo-mark">⚡</div>
+    <span id="shop-name-display">My Shop</span>
+  </div>
+  <div class="nav-center">
+    <button class="nav-tab active" onclick="showPage('store',this)">🛍 Store</button>
+    <button class="nav-tab" onclick="showPage('admin',this)">⚙ Admin</button>
+  </div>
+  <div class="nav-right">
+    <div class="cart-pill" onclick="openCart()">
+      🛒 Cart <div class="cart-dot" id="cart-count">0</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════ STORE PAGE ═══════════════════ -->
+<div id="page-store" class="page active">
+
+  <div class="store-hero">
+    <h1>Your favourite shop for<br><em id="store-hero-text">everything you love.</em></h1>
+    <p id="store-hero-sub">Quality products, fast delivery, unbeatable prices. Shop with confidence.</p>
+    <div class="store-trust">
+      <div class="trust-item">🚚 Fast delivery</div>
+      <div class="trust-item">💳 Secure Stripe checkout</div>
+      <div class="trust-item">↩️ Easy returns</div>
+      <div class="trust-item">⭐ Quality guaranteed</div>
+      <div class="trust-item">🌍 Global shipping</div>
+    </div>
+  </div>
+
+  <div class="cat-bar">
+    <button class="cat-chip active" onclick="setCategory('All',this)">All</button>
+    <button class="cat-chip" onclick="setCategory('Fashion',this)">👗 Fashion</button>
+    <button class="cat-chip" onclick="setCategory('Electronics',this)">📱 Electronics</button>
+    <button class="cat-chip" onclick="setCategory('Home',this)">🏡 Home & Garden</button>
+    <button class="cat-chip" onclick="setCategory('Beauty',this)">💄 Beauty & Health</button>
+    <div class="cat-search">
+      <span style="color:var(--muted)">🔍</span>
+      <input type="text" id="store-search" placeholder="Search products…" oninput="renderStore()">
+    </div>
+  </div>
+
+  <div class="products-wrap">
+    <div class="products-grid" id="store-grid">
+      <div class="empty-state"><div class="ei">🛍️</div><p>No products yet.<br>Add some in the Admin panel!</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ ADMIN PAGE ═══════════════════ -->
+<div id="page-admin" class="page">
+  <div class="admin-wrap">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-menu-item active" onclick="showPanel('dashboard',this)"><span class="admin-menu-icon">📊</span>Dashboard</div>
+      <div class="admin-menu-item" onclick="showPanel('products',this)"><span class="admin-menu-icon">📦</span>Products</div>
+      <div class="admin-menu-item" onclick="showPanel('orders',this)"><span class="admin-menu-icon">📋</span>Orders</div>
+      <div class="admin-menu-item" onclick="showPanel('stripe',this)"><span class="admin-menu-icon">💳</span>Stripe & Payments</div>
+      <div class="admin-menu-item" onclick="showPanel('calculator',this)"><span class="admin-menu-icon">🧮</span>Profit Calculator</div>
+      <div class="admin-menu-item" onclick="showPanel('settings',this)"><span class="admin-menu-icon">⚙️</span>Shop Settings</div>
+    </aside>
+
+    <!-- Content -->
+    <main class="admin-content">
+
+      <!-- DASHBOARD -->
+      <div id="panel-dashboard" class="admin-panel active">
+        <div class="admin-panel-title">Dashboard</div>
+        <div class="admin-panel-sub">Your business at a glance.</div>
+        <div class="kpi-grid">
+          <div class="kpi k1"><div class="kpi-label">Revenue</div><div class="kpi-val" id="kpi-rev">$0</div><div class="kpi-sub" id="kpi-rev-sub">0 orders</div></div>
+          <div class="kpi k2"><div class="kpi-label">Net Profit</div><div class="kpi-val" id="kpi-profit">$0</div><div class="kpi-sub" id="kpi-profit-sub">0% margin</div></div>
+          <div class="kpi k3"><div class="kpi-label">Orders</div><div class="kpi-val" id="kpi-orders">0</div><div class="kpi-sub" id="kpi-orders-sub">0 shipped</div></div>
+          <div class="kpi k4"><div class="kpi-label">Products</div><div class="kpi-val" id="kpi-prods">0</div><div class="kpi-sub" id="kpi-prods-sub">0 niches</div></div>
+          <div class="kpi k5"><div class="kpi-label">Stripe Collected</div><div class="kpi-val" id="kpi-stripe">$0</div><div class="kpi-sub" id="kpi-stripe-sub">0 payments</div></div>
+        </div>
+        <div class="section-row"><div class="section-row-title">Recent Orders</div><button class="btn btn-ghost" style="font-size:0.78rem;padding:7px 14px" onclick="showPanel('orders',null)">View all →</button></div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Order</th><th>Customer</th><th>Product</th><th>Sale</th><th>Profit</th><th>Payment</th><th>Status</th></tr></thead>
+            <tbody id="dash-orders"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div id="panel-products" class="admin-panel">
+        <div class="section-row">
+          <div><div class="admin-panel-title">Products</div><div class="admin-panel-sub">Your dropship catalogue.</div></div>
+          <button class="btn btn-primary" onclick="openModal('add-product')">+ Add Product</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Product</th><th>Niche</th><th>Supplier</th><th>Cost</th><th>Price</th><th>Margin</th><th>Stripe Link</th><th>Actions</th></tr></thead>
+            <tbody id="products-table"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div id="panel-orders" class="admin-panel">
+        <div class="section-row">
+          <div><div class="admin-panel-title">Orders</div><div class="admin-panel-sub">Track and fulfil every order.</div></div>
+          <button class="btn btn-primary" onclick="openModal('add-order')">+ Log Order</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Order</th><th>Customer</th><th>Product</th><th>Sale</th><th>Cost</th><th>Profit</th><th>Payment</th><th>Fulfilment</th><th>Update</th></tr></thead>
+            <tbody id="orders-table"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- STRIPE -->
+      <div id="panel-stripe" class="admin-panel">
+        <div class="admin-panel-title">Stripe & Payments</div>
+        <div class="admin-panel-sub">Connect Stripe to collect payments from customers.</div>
+
+        <div class="stripe-setup">
+          <div class="stripe-setup-head">
+            <div class="stripe-setup-icon">⚡</div>
+            <div>
+              <div class="stripe-setup-title">How to connect Stripe</div>
+              <div class="stripe-setup-sub">Stripe lets your customers pay by card. Takes 5 minutes to set up.</div>
+            </div>
+          </div>
+          <div class="stripe-steps">
+            <div class="ss"><div class="ss-num">1</div>Go to <strong style="color:var(--cyan)">stripe.com</strong> and create a free account</div>
+            <div class="ss"><div class="ss-num">2</div>In Stripe: Developers → API Keys → copy your <strong>Publishable key</strong></div>
+            <div class="ss"><div class="ss-num">3</div>Paste it below and click Save</div>
+            <div class="ss"><div class="ss-num">4</div>In Stripe: Payment Links → Create link → copy URL → paste when adding a product</div>
+            <div class="ss"><div class="ss-num">5</div>Customers click "Buy Now" on your store, pay on Stripe, you fulfil via your supplier</div>
+          </div>
+          <div class="key-grid">
+            <div class="key-box">
+              <div class="key-label">Publishable Key (pk_…)</div>
+              <div class="key-row"><input class="key-input" type="text" id="stripe-pk" placeholder="pk_live_…"><button class="key-save" onclick="saveKeys()">Save</button></div>
+              <div class="key-status none" id="pk-status">Not saved</div>
+            </div>
+            <div class="key-box">
+              <div class="key-label">Secret Key — never share publicly</div>
+              <div class="key-row"><input class="key-input" type="password" id="stripe-sk" placeholder="sk_live_… (server-side only)"><button class="key-save" onclick="saveKeys()">Save</button></div>
+              <div class="key-status none">Keep this on your server only — do not paste in public code</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.5rem">
+          <div class="kpi k5"><div class="kpi-label">Total Collected</div><div class="kpi-val" id="s-total">$0</div><div class="kpi-sub" id="s-count">0 payments</div></div>
+          <div class="kpi k4"><div class="kpi-label">This Month</div><div class="kpi-val" id="s-month">$0</div><div class="kpi-sub">logged payments</div></div>
+          <div class="kpi k1"><div class="kpi-label">Refunded</div><div class="kpi-val" id="s-refund">$0</div><div class="kpi-sub" id="s-ref-count">0 refunds</div></div>
+          <div class="kpi k2"><div class="kpi-label">Pending</div><div class="kpi-val" id="s-pending">$0</div><div class="kpi-sub" id="s-pend-count">0 pending</div></div>
+        </div>
+
+        <div class="plb">
+          <div class="plb-title">🔗 Payment Link Manager</div>
+          <div class="plb-sub">Create links in your <a href="https://dashboard.stripe.com/payment-links" target="_blank" style="color:var(--cyan)">Stripe Dashboard → Payment Links</a>, paste the URL here, then assign it to a product.</div>
+          <div class="plb-grid">
+            <div class="plb-group"><div class="plb-lbl">Product Name</div><input class="plb-input" id="pl-name" placeholder="e.g. Wireless Earbuds"></div>
+            <div class="plb-group"><div class="plb-lbl">Price ($)</div><input class="plb-input" type="number" id="pl-price" placeholder="19.99"></div>
+            <div class="plb-group"><div class="plb-lbl">Stripe Payment Link URL</div><input class="plb-input" id="pl-url" placeholder="https://buy.stripe.com/…"></div>
+            <button class="btn btn-coral" onclick="addPayLink()" style="align-self:end">+ Add</button>
+          </div>
+          <div id="pay-links-list"></div>
+        </div>
+
+        <div class="section-row">
+          <div class="section-row-title">Payment Log</div>
+          <button class="btn btn-primary" onclick="openModal('log-payment')">+ Log Payment</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Date</th><th>Customer</th><th>Product</th><th>Amount</th><th>Stripe Ref</th><th>Status</th><th>Notes</th></tr></thead>
+            <tbody id="payments-table"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PROFIT CALC -->
+      <div id="panel-calculator" class="admin-panel">
+        <div class="admin-panel-title">Profit Calculator</div>
+        <div class="admin-panel-sub">Check your margins before you list any product.</div>
+        <div class="calc-grid">
+          <div class="field"><label>Supplier Cost ($)</label><input type="number" id="cc-cost" placeholder="5.00" oninput="calcProfit()"></div>
+          <div class="field"><label>Your Selling Price ($)</label><input type="number" id="cc-price" placeholder="19.99" oninput="calcProfit()"></div>
+          <div class="field"><label>Shipping Cost ($)</label><input type="number" id="cc-ship" placeholder="2.00" oninput="calcProfit()"></div>
+          <div class="field"><label>Platform Fee %</label><input type="number" id="cc-fee" placeholder="3" oninput="calcProfit()"></div>
+          <div class="field"><label>Ad Spend Per Sale ($)</label><input type="number" id="cc-ads" placeholder="1.50" oninput="calcProfit()"></div>
+          <div class="field"><label>Units Per Month</label><input type="number" id="cc-units" placeholder="50" oninput="calcProfit()"></div>
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-head">📊 Monthly Projection</div>
+          <div class="calc-result-body">
+            <div class="crb-item"><div class="crb-label">Revenue</div><div class="crb-val revenue" id="cr-rev">$—</div></div>
+            <div class="crb-item"><div class="crb-label">Net Profit</div><div class="crb-val profit" id="cr-profit">$—</div></div>
+            <div class="crb-item"><div class="crb-label">Margin</div><div class="crb-val margin" id="cr-margin">—%</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="panel-settings" class="admin-panel">
+        <div class="admin-panel-title">Shop Settings</div>
+        <div class="admin-panel-sub">Customise how your store looks and feels.</div>
+        <div style="max-width:500px">
+          <div class="field"><label>Shop Name</label><input type="text" id="set-name" placeholder="e.g. Trendy Picks UK"></div>
+          <div class="field"><label>Hero Headline (coloured text)</label><input type="text" id="set-hero" placeholder="e.g. everything you love."></div>
+          <div class="field"><label>Hero Subheading</label><textarea id="set-sub" placeholder="e.g. Quality products, fast delivery…"></textarea></div>
+          <div class="field"><label>Your Stripe Payment Link (default checkout)</label><input type="text" id="set-stripe" placeholder="https://buy.stripe.com/…"></div>
+          <button class="btn btn-lime" onclick="saveSettings()" style="margin-top:0.5rem">Save Settings</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ═══ CART ═══ -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-head">
+    <div class="cart-head-title">🛒 Your Cart</div>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal"><span>Items</span><span id="cart-item-count">0</span></div>
+    <div class="cart-total-row"><span>Total</span><span id="cart-total">$0.00</span></div>
+    <button class="checkout-btn" onclick="checkout()">Checkout with Stripe →</button>
+  </div>
+</div>
+
+<!-- ═══ PRODUCT DETAIL MODAL ═══ -->
+<div class="modal-bg" id="modal-product">
+  <div class="prod-detail" id="prod-detail-inner" style="position:relative"></div>
+</div>
+
+<!-- ═══ ADD PRODUCT MODAL ═══ -->
+<div class="modal-bg" id="modal-add-product">
+  <div class="modal">
+    <div class="modal-title">Add Product</div>
+    <div class="modal-sub">Add a product to your shop catalogue.</div>
+    <div class="field"><label>Product Name</label><input type="text" id="p-name" placeholder="e.g. Wireless Earbuds Pro"></div>
+    <div class="field"><label>Description</label><textarea id="p-desc" placeholder="What makes this product great…"></textarea></div>
+    <div class="field-row">
+      <div class="field"><label>Niche</label><select id="p-niche"><option value="Fashion">👗 Fashion</option><option value="Electronics">📱 Electronics</option><option value="Home">🏡 Home & Garden</option><option value="Beauty">💄 Beauty & Health</option></select></div>
+      <div class="field"><label>Supplier</label><select id="p-supplier"><option>AliExpress</option><option>CJ Dropshipping</option><option>Spocket</option><option>Zendrop</option><option>Printful</option><option>Other</option></select></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Supplier Cost ($)</label><input type="number" id="p-cost" placeholder="5.00"></div>
+      <div class="field"><label>Your Price ($)</label><input type="number" id="p-sell" placeholder="19.99"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Emoji Icon</label><input type="text" id="p-emoji" placeholder="🎧" maxlength="2"></div>
+      <div class="field"><label>Stripe Payment Link</label><input type="text" id="p-stripe" placeholder="https://buy.stripe.com/…"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('add-product')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ADD ORDER MODAL ═══ -->
+<div class="modal-bg" id="modal-add-order">
+  <div class="modal">
+    <div class="modal-title">Log Order</div>
+    <div class="modal-sub">Record a customer order to track profit and fulfilment.</div>
+    <div class="field"><label>Customer Name</label><input type="text" id="o-cust" placeholder="e.g. Sarah Johnson"></div>
+    <div class="field"><label>Product</label><select id="o-prod"></select></div>
+    <div class="field-row">
+      <div class="field"><label>Sale Price ($)</label><input type="number" id="o-sale" placeholder="19.99"></div>
+      <div class="field"><label>Supplier Cost ($)</label><input type="number" id="o-cost" placeholder="5.00"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Fulfilment</label><select id="o-status"><option value="processing">Processing</option><option value="shipped">Shipped</option><option value="delivered">Delivered</option><option value="cancelled">Cancelled</option></select></div>
+      <div class="field"><label>Payment</label><select id="o-pay"><option value="pending">Pending</option><option value="paid">Paid</option><option value="refunded">Refunded</option></select></div>
+    </div>
+    <div class="field"><label>Stripe Ref (optional)</label><input type="text" id="o-ref" placeholder="pi_3abc…"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('add-order')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveOrder()">Log Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LOG PAYMENT MODAL ═══ -->
+<div class="modal-bg" id="modal-log-payment">
+  <div class="modal">
+    <div class="modal-title">Log Payment</div>
+    <div class="modal-sub">Record a payment received from a customer via Stripe.</div>
+    <div class="field"><label>Customer</label><input type="text" id="pay-cust" placeholder="e.g. Sarah Johnson"></div>
+    <div class="field"><label>Product / Description</label><input type="text" id="pay-prod" placeholder="e.g. Wireless Earbuds Pro"></div>
+    <div class="field-row">
+      <div class="field"><label>Amount ($)</label><input type="number" id="pay-amt" placeholder="19.99"></div>
+      <div class="field"><label>Status</label><select id="pay-status"><option value="paid">Paid</option><option value="pending">Pending</option><option value="refunded">Refunded</option></select></div>
+    </div>
+    <div class="field"><label>Stripe Payment Reference</label><input type="text" id="pay-ref" placeholder="pi_3abc… (from your Stripe Dashboard)"></div>
+    <div class="field"><label>Notes</label><textarea id="pay-notes" placeholder="Any extra details…"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('log-payment')">Cancel</button>
+      <button class="btn btn-primary" onclick="savePayment()">Save Payment</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ <span id="toast-msg">Saved!</span></div>
+
+<script>
+// ──── STATE ────
+let products = JSON.parse(localStorage.getItem('myshop-products') || '[]');
+let orders   = JSON.parse(localStorage.getItem('myshop-orders')   || '[]');
+let payments = JSON.parse(localStorage.getItem('myshop-payments') || '[]');
+let payLinks = JSON.parse(localStorage.getItem('myshop-paylinks') || '[]');
+let settings = JSON.parse(localStorage.getItem('myshop-settings') || '{"name":"My Shop","hero":"everything you love.","sub":"Quality products, fast delivery, unbeatable prices.","stripe":""}');
+let cart     = JSON.parse(localStorage.getItem('myshop-cart')     || '[]');
+let storeCategory = 'All';
+
+const nc = {
+  Fashion:     { color:'#FF3D3D', thumb:'#150808' },
+  Electronics: { color:'#00D4FF', thumb:'#000d14' },
+  Home:        { color:'#AAFF57', thumb:'#091200' },
+  Beauty:      { color:'#FFE135', thumb:'#120f00' },
+};
+
+// ──── INIT ────
+applySettings();
+renderStore();
+renderDashboard();
+loadStripeKeys();
+
+// ──── PAGE / PANEL SWITCH ────
+function showPage(p, btn) {
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else document.querySelectorAll('.nav-tab').forEach(t => { if (t.textContent.toLowerCase().includes(p)) t.classList.add('active'); });
+  if (p === 'store') renderStore();
+  if (p === 'admin') renderDashboard();
+}
+
+function showPanel(p, el) {
+  document.querySelectorAll('.admin-panel').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.admin-menu-item').forEach(x => x.classList.remove('active'));
+  document.getElementById('panel-' + p).classList.add('active');
+  if (el) el.classList.add('active');
+  if (p === 'products') renderProductsTable();
+  if (p === 'orders')   renderOrdersTable();
+  if (p === 'stripe')   renderStripePanel();
+  if (p === 'settings') loadSettings();
+}
+
+// ──── MODAL ────
+function openModal(name) {
+  if (name === 'add-order') populateOrderSelect();
+  document.getElementById('modal-' + name).classList.add('open');
+}
+function closeModal(name) { document.getElementById('modal-' + name).classList.remove('open'); }
+document.querySelectorAll('.modal-bg').forEach(el => el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); }));
+
+// ──── TOAST ────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ──── SAVE HELPERS ────
+function saveAll(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+
+// ──── SETTINGS ────
+function applySettings() {
+  document.getElementById('shop-name-display').textContent = settings.name || 'My Shop';
+  document.title = (settings.name || 'My Shop') + ' — Shop';
+  const heroEl = document.getElementById('store-hero-text');
+  const subEl  = document.getElementById('store-hero-sub');
+  if (heroEl) heroEl.textContent = settings.hero || 'everything you love.';
+  if (subEl)  subEl.textContent  = settings.sub  || 'Quality products, fast delivery, unbeatable prices.';
+}
+function loadSettings() {
+  document.getElementById('set-name').value   = settings.name   || '';
+  document.getElementById('set-hero').value   = settings.hero   || '';
+  document.getElementById('set-sub').value    = settings.sub    || '';
+  document.getElementById('set-stripe').value = settings.stripe || '';
+}
+function saveSettings() {
+  settings = {
+    name:   document.getElementById('set-name').value.trim()   || 'My Shop',
+    hero:   document.getElementById('set-hero').value.trim()   || 'everything you love.',
+    sub:    document.getElementById('set-sub').value.trim()    || '',
+    stripe: document.getElementById('set-stripe').value.trim() || '',
+  };
+  saveAll('myshop-settings', settings);
+  applySettings();
+  toast('Settings saved!');
+}
+
+// ──── PRODUCTS ────
+function saveProduct() {
+  const name = document.getElementById('p-name').value.trim();
+  if (!name) { alert('Please enter a product name.'); return; }
+  const cost = parseFloat(document.getElementById('p-cost').value) || 0;
+  const sell = parseFloat(document.getElementById('p-sell').value) || 0;
+  const margin = sell > 0 ? (((sell - cost) / sell) * 100).toFixed(0) : 0;
+  products.push({
+    id: Date.now(), name,
+    desc:       document.getElementById('p-desc').value.trim(),
+    niche:      document.getElementById('p-niche').value,
+    supplier:   document.getElementById('p-supplier').value,
+    cost, sell, margin,
+    emoji:      document.getElementById('p-emoji').value.trim() || '📦',
+    stripeLink: document.getElementById('p-stripe').value.trim(),
+  });
+  saveAll('myshop-products', products);
+  closeModal('add-product');
+  ['p-name','p-desc','p-cost','p-sell','p-emoji','p-stripe'].forEach(id => document.getElementById(id).value = '');
+  renderProductsTable(); renderStore(); renderDashboard();
+  toast('Product added!');
+}
+
+function deleteProduct(id) {
+  if (!confirm('Remove this product?')) return;
+  products = products.filter(p => p.id !== id);
+  saveAll('myshop-products', products);
+  renderProductsTable(); renderStore(); renderDashboard();
+  toast('Product removed.');
+}
+
+function renderProductsTable() {
+  const tbody = document.getElementById('products-table');
+  if (!products.length) { tbody.innerHTML = '<tr><td colspan="8" class="empty-state" style="padding:2rem">No products yet.</td></tr>'; return; }
+  tbody.innerHTML = products.map(p => `<tr>
+    <td><strong>${p.emoji} ${p.name}</strong></td>
+    <td>${p.niche}</td>
+    <td>${p.supplier}</td>
+    <td>$${p.cost.toFixed(2)}</td>
+    <td>$${p.sell.toFixed(2)}</td>
+    <td style="color:var(--lime)">+${p.margin}%</td>
+    <td>${p.stripeLink ? `<a href="${p.stripeLink}" target="_blank" style="color:var(--cyan);font-size:0.78rem">Link ↗</a>` : '<span style="color:var(--muted);font-size:0.78rem">None</span>'}</td>
+    <td><button class="btn btn-ghost" style="font-size:0.75rem;padding:5px 10px" onclick="deleteProduct(${p.id})">🗑 Remove</button></td>
+  </tr>`).join('');
+}
+
+// ──── STORE ────
+function setCategory(cat, el) {
+  storeCategory = cat;
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderStore();
+}
+
+function renderStore() {
+  const search = (document.getElementById('store-search')?.value || '').toLowerCase();
+  const list = products.filter(p =>
+    (storeCategory === 'All' || p.niche === storeCategory) &&
+    (!search || p.name.toLowerCase().includes(search))
+  );
+  const grid = document.getElementById('store-grid');
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty-state"><div class="ei">${products.length ? '🔍' : '🛍️'}</div><p>${products.length ? 'No products match.' : 'No products yet.<br>Add some in the Admin panel!'}</p></div>`;
+    return;
+  }
+  grid.innerHTML = list.map((p, i) => {
+    const c = nc[p.niche] || nc.Electronics;
+    const isNew = i < 3;
+    return `<div class="product-card nc-${p.niche}">
+      <div class="pc-thumb">
+        ${p.emoji}
+        ${isNew ? '<div class="pc-new">NEW</div>' : ''}
+      </div>
+      <div class="pc-body">
+        <div class="pc-niche">${p.niche}</div>
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-desc">${p.desc || 'Quality product from trusted suppliers. Fast worldwide delivery.'}</div>
+        <div class="pc-price-row">
+          <div class="pc-price">$${p.sell.toFixed(2)}</div>
+          <div class="pc-ship">Free delivery</div>
+        </div>
+      </div>
+      <div class="pc-actions">
+        ${p.stripeLink
+          ? `<button class="pc-btn-buy" onclick="window.open('${p.stripeLink}','_blank')">Buy Now</button>`
+          : `<button class="pc-btn-buy" onclick="addToCart(${p.id})">Add to Cart</button>`}
+        <button class="pc-btn-peek" onclick="showProduct(${p.id})" title="Quick view">👁</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ──── PRODUCT DETAIL ────
+function showProduct(id) {
+  const p = products.find(x => x.id === id); if (!p) return;
+  const c = nc[p.niche] || nc.Electronics;
+  document.getElementById('prod-detail-inner').innerHTML = `
+    <button class="pd-close" onclick="closeModal('product')">✕ Close</button>
+    <div class="pd-thumb nc-${p.niche}">${p.emoji}</div>
+    <div class="pd-body">
+      <div class="pd-niche" style="color:${c.color}">${p.niche}</div>
+      <div class="pd-name">${p.name}</div>
+      <div class="pd-desc">${p.desc || 'Quality product sourced from trusted suppliers. Shipped worldwide with tracking.'}</div>
+      <div class="pd-price" style="color:${c.color}">$${p.sell.toFixed(2)}</div>
+      <div class="pd-perks">
+        <span class="pd-perk">✅ In stock</span>
+        <span class="pd-perk">🚚 Free delivery</span>
+        <span class="pd-perk">↩️ Easy returns</span>
+        <span class="pd-perk">💳 Secure payment</span>
+      </div>
+      <div class="pd-actions">
+        ${p.stripeLink
+          ? `<button class="btn btn-primary" style="flex:1;justify-content:center" onclick="window.open('${p.stripeLink}','_blank')">Buy Now via Stripe →</button>`
+          : `<button class="btn btn-primary" style="flex:1;justify-content:center" onclick="addToCart(${p.id});closeModal('product')">Add to Cart</button>`}
+        <button class="btn btn-ghost" onclick="closeModal('product')">Close</button>
+      </div>
+    </div>`;
+  openModal('product');
+}
+
+// ──── CART ────
+function addToCart(id) {
+  const p = products.find(x => x.id === id); if (!p) return;
+  const existing = cart.find(c => c.id === id);
+  if (existing) existing.qty++;
+  else cart.push({ id: p.id, name: p.name, price: p.sell, emoji: p.emoji, qty: 1, stripeLink: p.stripeLink });
+  saveAll('myshop-cart', cart);
+  updateCartUI(); openCart();
+  toast(`${p.emoji} ${p.name} added to cart!`);
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty = Math.max(0, item.qty + delta);
+  if (item.qty === 0) cart = cart.filter(c => c.id !== id);
+  saveAll('myshop-cart', cart);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const count = cart.reduce((s, c) => s + c.qty, 0);
+  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  document.getElementById('cart-count').textContent = count;
+  document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
+  document.getElementById('cart-item-count').textContent = count + (count !== 1 ? ' items' : ' item');
+  const list = document.getElementById('cart-items');
+  if (!cart.length) { list.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Start shopping! 🛍️</div>'; return; }
+  list.innerHTML = cart.map(c => `
+    <div class="cart-item">
+      <div class="ci-emoji">${c.emoji}</div>
+      <div class="ci-info">
+        <div class="ci-name">${c.name}</div>
+        <div class="ci-price">$${(c.price * c.qty).toFixed(2)}</div>
+        <div class="ci-qty">
+          <button onclick="changeQty(${c.id},-1)">−</button>
+          <span>${c.qty}</span>
+          <button onclick="changeQty(${c.id},1)">+</button>
+        </div>
+      </div>
+      <button class="ci-remove" onclick="changeQty(${c.id},-99)">✕</button>
+    </div>`).join('');
+}
+
+function openCart()  { document.getElementById('cart-sidebar').classList.add('open'); document.getElementById('cart-overlay').classList.add('open'); }
+function closeCart() { document.getElementById('cart-sidebar').classList.remove('open'); document.getElementById('cart-overlay').classList.remove('open'); }
+
+function checkout() {
+  if (!cart.length) { alert('Your cart is empty!'); return; }
+  const itemWithLink = cart.find(c => c.stripeLink);
+  const globalLink = settings.stripe;
+  if (itemWithLink) { window.open(itemWithLink.stripeLink, '_blank'); }
+  else if (globalLink) { window.open(globalLink, '_blank'); }
+  else { alert('No Stripe payment link set up yet.\n\nGo to Admin → Stripe & Payments to set one up, or add a Stripe link to each product.'); }
+}
+
+// ──── ORDERS ────
+function populateOrderSelect() {
+  document.getElementById('o-prod').innerHTML = products.length
+    ? products.map(p => `<option value="${p.name}">${p.emoji} ${p.name}</option>`).join('')
+    : '<option>— Add a product first —</option>';
+}
+
+function saveOrder() {
+  const cust = document.getElementById('o-cust').value.trim();
+  if (!cust) { alert('Please enter a customer name.'); return; }
+  const sale = parseFloat(document.getElementById('o-sale').value) || 0;
+  const cost = parseFloat(document.getElementById('o-cost').value) || 0;
+  const productName = document.getElementById('o-prod').value;
+  const sup = products.find(p => p.name === productName)?.supplier || 'Unknown';
+  orders.push({
+    id: Date.now(), customer: cust, productName, supplier: sup,
+    sale, cost, profit: sale - cost,
+    status:    document.getElementById('o-status').value,
+    payStatus: document.getElementById('o-pay').value,
+    stripeRef: document.getElementById('o-ref').value.trim(),
+    date: new Date().toLocaleDateString('en-US'),
+  });
+  saveAll('myshop-orders', orders);
+  closeModal('add-order');
+  ['o-cust','o-sale','o-cost','o-ref'].forEach(id => document.getElementById(id).value = '');
+  renderOrdersTable(); renderDashboard();
+  toast('Order logged!');
+}
+
+function updateStatus(id, val) {
+  orders = orders.map(o => o.id === id ? {...o, status: val} : o);
+  saveAll('myshop-orders', orders);
+  renderDashboard();
+  toast('Status updated → ' + val);
+}
+
+function renderOrdersTable() {
+  const tbody = document.getElementById('orders-table');
+  if (!orders.length) { tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:2rem">No orders yet.</td></tr>'; return; }
+  tbody.innerHTML = [...orders].reverse().map(o => `<tr>
+    <td><span class="id-tag">#${String(o.id).slice(-5)}</span></td>
+    <td>${o.customer}</td>
+    <td>${o.productName}</td>
+    <td>$${o.sale.toFixed(2)}</td>
+    <td>$${o.cost.toFixed(2)}</td>
+    <td style="color:${o.profit >= 0 ? 'var(--lime)' : 'var(--coral)'}">$${o.profit.toFixed(2)}</td>
+    <td><span class="badge badge-${o.payStatus || 'pending'}">${(o.payStatus || 'pending').charAt(0).toUpperCase()+(o.payStatus || 'pending').slice(1)}</span></td>
+    <td><span class="badge badge-${o.status}">${o.status.charAt(0).toUpperCase()+o.status.slice(1)}</span></td>
+    <td><select class="inline-sel" onchange="updateStatus(${o.id},this.value)">
+      <option value="processing" ${o.status==='processing'?'selected':''}>Processing</option>
+      <option value="shipped"    ${o.status==='shipped'?'selected':''}>Shipped</option>
+      <option value="delivered"  ${o.status==='delivered'?'selected':''}>Delivered</option>
+      <option value="cancelled"  ${o.status==='cancelled'?'selected':''}>Cancelled</option>
+    </select></td>
+  </tr>`).join('');
+}
+
+// ──── PAYMENTS ────
+function savePayment() {
+  const cust = document.getElementById('pay-cust').value.trim();
+  if (!cust) { alert('Please enter a customer name.'); return; }
+  payments.push({
+    id: Date.now(),
+    date: new Date().toLocaleDateString('en-US'),
+    customer: cust,
+    product:  document.getElementById('pay-prod').value.trim(),
+    amount:   parseFloat(document.getElementById('pay-amt').value) || 0,
+    status:   document.getElementById('pay-status').value,
+    ref:      document.getElementById('pay-ref').value.trim(),
+    notes:    document.getElementById('pay-notes').value.trim(),
+  });
+  saveAll('myshop-payments', payments);
+  closeModal('log-payment');
+  ['pay-cust','pay-prod','pay-amt','pay-ref','pay-notes'].forEach(id => document.getElementById(id).value = '');
+  renderStripePanel(); renderDashboard();
+  toast('Payment logged!');
+}
+
+// ──── STRIPE ────
+function saveKeys() {
+  const pk = document.getElementById('stripe-pk').value.trim();
+  if (pk) { localStorage.setItem('myshop-stripe-pk', pk); document.getElementById('pk-status').textContent = '✅ Key saved'; document.getElementById('pk-status').className = 'key-status ok'; }
+  toast('Stripe keys saved!');
+}
+function loadStripeKeys() {
+  const pk = localStorage.getItem('myshop-stripe-pk') || '';
+  if (pk) { document.getElementById('stripe-pk').value = pk; document.getElementById('pk-status').textContent = '✅ Key saved'; document.getElementById('pk-status').className = 'key-status ok'; }
+}
+
+function addPayLink() {
+  const name  = document.getElementById('pl-name').value.trim();
+  const price = parseFloat(document.getElementById('pl-price').value) || 0;
+  const url   = document.getElementById('pl-url').value.trim();
+  if (!name || !url) { alert('Please enter a name and URL.'); return; }
+  payLinks.push({ id: Date.now(), name, price, url });
+  saveAll('myshop-paylinks', payLinks);
+  ['pl-name','pl-price','pl-url'].forEach(id => document.getElementById(id).value = '');
+  renderPayLinks(); toast('Payment link added!');
+}
+function deletePayLink(id) { payLinks = payLinks.filter(l => l.id !== id); saveAll('myshop-paylinks', payLinks); renderPayLinks(); }
+function copyLink(url) { navigator.clipboard.writeText(url); toast('Link copied!'); }
+
+function renderPayLinks() {
+  const el = document.getElementById('pay-links-list');
+  if (!payLinks.length) { el.innerHTML = ''; return; }
+  el.innerHTML = payLinks.map(l => `
+    <div class="pl-row">
+      <div>
+        <div class="pl-name">${l.name} — $${l.price.toFixed(2)}</div>
+        <div class="pl-url">${l.url}</div>
+      </div>
+      <div class="pl-acts">
+        <button class="pl-btn" onclick="copyLink('${l.url}')">Copy</button>
+        <button class="pl-btn" style="color:var(--coral)" onclick="deletePayLink(${l.id})">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderStripePanel() {
+  loadStripeKeys();
+  renderPayLinks();
+  const paid     = payments.filter(p => p.status === 'paid').reduce((s, p) => s + p.amount, 0);
+  const refunded = payments.filter(p => p.status === 'refunded').reduce((s, p) => s + p.amount, 0);
+  const pending  = payments.filter(p => p.status === 'pending').reduce((s, p) => s + p.amount, 0);
+  const now = new Date();
+  const monthPaid = payments.filter(p => {
+    if (p.status !== 'paid') return false;
+    const parts = p.date?.split('/');
+    if (!parts || parts.length < 3) return false;
+    const d = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+  }).reduce((s, p) => s + p.amount, 0);
+
+  document.getElementById('s-total').textContent   = '$' + paid.toFixed(0);
+  document.getElementById('s-count').textContent   = payments.filter(p => p.status === 'paid').length + ' payments';
+  document.getElementById('s-month').textContent   = '$' + monthPaid.toFixed(0);
+  document.getElementById('s-refund').textContent  = '$' + refunded.toFixed(0);
+  document.getElementById('s-ref-count').textContent = payments.filter(p => p.status === 'refunded').length + ' refunds';
+  document.getElementById('s-pending').textContent = '$' + pending.toFixed(0);
+  document.getElementById('s-pend-count').textContent = payments.filter(p => p.status === 'pending').length + ' pending';
+
+  const tbody = document.getElementById('payments-table');
+  if (!payments.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:2rem">No payments yet.</td></tr>'; return; }
+  tbody.innerHTML = [...payments].reverse().map(p => `<tr>
+    <td>${p.date}</td><td>${p.customer}</td><td>${p.product}</td>
+    <td style="color:var(--lime)">$${p.amount.toFixed(2)}</td>
+    <td style="font-family:monospace;font-size:0.75rem;color:var(--cyan)">${p.ref || '—'}</td>
+    <td><span class="badge badge-${p.status}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span></td>
+    <td style="color:var(--muted);font-size:0.78rem">${p.notes || '—'}</td>
+  </tr>`).join('');
+}
+
+// ──── DASHBOARD ────
+function renderDashboard() {
+  const rev    = orders.reduce((s, o) => s + o.sale, 0);
+  const profit = orders.reduce((s, o) => s + o.profit, 0);
+  const shipped = orders.filter(o => o.status === 'shipped' || o.status === 'delivered').length;
+  const margin = rev > 0 ? ((profit / rev) * 100).toFixed(0) : 0;
+  const niches = [...new Set(products.map(p => p.niche))].length;
+  const stripeTotal = payments.filter(p => p.status === 'paid').reduce((s, p) => s + p.amount, 0);
+
+  document.getElementById('kpi-rev').textContent       = '$' + rev.toFixed(0);
+  document.getElementById('kpi-profit').textContent    = '$' + profit.toFixed(0);
+  document.getElementById('kpi-orders').textContent    = orders.length;
+  document.getElementById('kpi-prods').textContent     = products.length;
+  document.getElementById('kpi-stripe').textContent    = '$' + stripeTotal.toFixed(0);
+  document.getElementById('kpi-rev-sub').textContent   = orders.length + ' order' + (orders.length !== 1 ? 's' : '');
+  document.getElementById('kpi-profit-sub').textContent = margin + '% margin';
+  document.getElementById('kpi-orders-sub').textContent = shipped + ' shipped';
+  document.getElementById('kpi-prods-sub').textContent  = niches + ' niche' + (niches !== 1 ? 's' : '');
+  document.getElementById('kpi-stripe-sub').textContent = payments.filter(p => p.status === 'paid').length + ' payments';
+
+  const tbody = document.getElementById('dash-orders');
+  const recent = [...orders].reverse().slice(0, 6);
+  if (!recent.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:1.5rem">No orders yet.</td></tr>'; return; }
+  tbody.innerHTML = recent.map(o => `<tr>
+    <td><span class="id-tag">#${String(o.id).slice(-5)}</span></td>
+    <td>${o.customer}</td><td>${o.productName}</td>
+    <td>$${o.sale.toFixed(2)}</td>
+    <td style="color:${o.profit >= 0 ? 'var(--lime)' : 'var(--coral)'}">$${o.profit.toFixed(2)}</td>
+    <td><span class="badge badge-${o.payStatus || 'pending'}">${(o.payStatus || 'pending').charAt(0).toUpperCase()+(o.payStatus || 'pending').slice(1)}</span></td>
+    <td><span class="badge badge-${o.status}">${o.status.charAt(0).toUpperCase()+o.status.slice(1)}</span></td>
+  </tr>`).join('');
+}
+
+// ──── PROFIT CALC ────
+function calcProfit() {
+  const cost  = parseFloat(document.getElementById('cc-cost').value)  || 0;
+  const price = parseFloat(document.getElementById('cc-price').value) || 0;
+  const ship  = parseFloat(document.getElementById('cc-ship').value)  || 0;
+  const fee   = price * (parseFloat(document.getElementById('cc-fee').value) || 0) / 100;
+  const ads   = parseFloat(document.getElementById('cc-ads').value)   || 0;
+  const units = parseFloat(document.getElementById('cc-units').value) || 0;
+  const pu    = price - cost - ship - fee - ads;
+  document.getElementById('cr-rev').textContent    = '$' + (price * units).toFixed(0);
+  document.getElementById('cr-profit').textContent = '$' + (pu * units).toFixed(0);
+  document.getElementById('cr-margin').textContent = (price > 0 ? ((pu / price) * 100).toFixed(1) : 0) + '%';
+}
+
+// ──── INIT UI ────
+updateCartUI();
+</script>
+</body>
+</html>
