@@ -358,12 +358,9 @@ footer{background:#0f0f0f;padding:4rem 0 0;color:rgba(255,255,255,0.55);}
       <span class="nav-search-icon">🔍</span>
     </div>
     <div class="nav-actions">
-      <button class="nav-action" onclick="showSection('blog')">
-        <span class="nav-action-icon">📝</span>Blog
-      </button>
-      <button class="nav-action">
-        <span class="nav-action-icon">👤</span>Account
-      </button>
+      <a class="nav-action" href="mailto:support@pickbazaar.com">
+        <span class="nav-action-icon">✉️</span>Contact
+      </a>
       <button class="nav-action" onclick="openCart()">
         <span class="nav-action-icon">🛒<span class="nav-badge" id="cart-count">0</span></span>Cart
       </button>
@@ -396,17 +393,12 @@ footer{background:#0f0f0f;padding:4rem 0 0;color:rgba(255,255,255,0.55);}
         <button class="btn-hero btn-hero-outline" onclick="filterCat('Sale')">View Special Deals</button>
       </div>
       <div class="hero-stats">
-        <div><div class="hero-stat-num">150+</div><div class="hero-stat-label">Countries Delivered</div></div>
-        <div><div class="hero-stat-num">$0</div><div class="hero-stat-label">Stock Upfront</div></div>
         <div><div class="hero-stat-num">7</div><div class="hero-stat-label">Product Categories</div></div>
+        <div><div class="hero-stat-num">$0</div><div class="hero-stat-label">Stock to Buy Upfront</div></div>
+        <div><div class="hero-stat-num">USA 🇺🇸</div><div class="hero-stat-label">& Worldwide Shipping</div></div>
       </div>
     </div>
-    <div class="hero-cards" id="hero-cards">
-      <div class="hc"><div class="hc-emoji">👗</div><div class="hc-name">Fashion & Style</div><div class="hc-price">From $9.99</div></div>
-      <div class="hc"><div class="hc-emoji">📱</div><div class="hc-name">Electronics & Gadgets</div><div class="hc-price">From $14.99</div></div>
-      <div class="hc"><div class="hc-emoji">🐾</div><div class="hc-name">Pet Accessories</div><div class="hc-price">From $7.99</div></div>
-      <div class="hc"><div class="hc-emoji">💪</div><div class="hc-name">Gym & Fitness</div><div class="hc-price">From $12.99</div></div>
-    </div>
+    <div class="hero-cards" id="hero-cards"></div>
   </div>
 </section>
 
@@ -441,7 +433,7 @@ footer{background:#0f0f0f;padding:4rem 0 0;color:rgba(255,255,255,0.55);}
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-eyebrow">Inspire Your Inner Shopper</div><div class="sec-title">Discover <em>Best Sellers</em></div></div>
-      <a class="view-all-link" href="#" onclick="filterCat('All')">View All Products →</a>
+      <a class="view-all-link" href="javascript:void(0)" onclick="filterCat('All')">View All Products →</a>
     </div>
     <div class="prods-grid" id="best-sellers-grid"></div>
   </div>
@@ -472,7 +464,7 @@ footer{background:#0f0f0f;padding:4rem 0 0;color:rgba(255,255,255,0.55);}
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-eyebrow">Just Added</div><div class="sec-title"><em>New Arrivals</em></div></div>
-      <a class="view-all-link" href="#" onclick="filterCat('All')">View All →</a>
+      <a class="view-all-link" href="javascript:void(0)" onclick="filterCat('All')">View All →</a>
     </div>
     <div class="prods-grid" id="new-arrivals-grid"></div>
   </div>
@@ -505,7 +497,7 @@ footer{background:#0f0f0f;padding:4rem 0 0;color:rgba(255,255,255,0.55);}
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-eyebrow">Get Moving</div><div class="sec-title">Gym & <em>Fitness</em></div></div>
-      <a class="view-all-link" href="#" onclick="filterCat('Gym')">Shop All Fitness →</a>
+      <a class="view-all-link" href="javascript:void(0)" onclick="filterCat('Gym')">Shop All Fitness →</a>
     </div>
     <div class="prods-grid" id="gym-grid"></div>
   </div>
@@ -555,35 +547,9 @@ footer{background:#0f0f0f;padding:4rem 0 0;color:rgba(255,255,255,0.55);}
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><div class="sec-eyebrow">Customer Reviews</div><div class="sec-title">What Our Customers <em>Say</em></div></div>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Ordered the pet accessories bundle and they arrived in under a week to Texas. Quality is amazing. My dog loves the new toys. Will definitely order again!"</p><div class="testi-author"><div class="testi-av">👩</div><div><div class="testi-name">Ashley M.</div><div class="testi-loc">Houston, TX 🇺🇸</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Got the gym resistance bands and car organizer. Both are excellent quality. Fast shipping to Canada and the packaging was perfect. Highly recommend!"</p><div class="testi-author"><div class="testi-av">👨</div><div><div class="testi-name">James K.</div><div class="testi-loc">Toronto, CA 🇨🇦</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Bought the skincare set and wireless earbuds. Arrived in Australia in 10 days. Everything looks exactly like the photos. Super easy Stripe checkout too!"</p><div class="testi-author"><div class="testi-av">👩</div><div><div class="testi-name">Sophie R.</div><div class="testi-loc">Sydney, AU 🇦🇺</div></div></div></div>
-    </div>
-  </div>
-</section>
+<!-- Testimonials section removed — will be added when real reviews come in -->
 
-<!-- BLOG -->
-<section class="section section-bg">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><div class="sec-eyebrow">From the Blog</div><div class="sec-title">Shopping Tips & <em>Guides</em></div></div>
-      <a class="view-all-link" href="#">See More →</a>
-    </div>
-    <div class="blog-grid">
-      <div class="blog-card"><div class="blog-img" style="background:#f0f4ff">📱</div><div class="blog-body"><div class="blog-tag">Electronics</div><div class="blog-title">Top 10 Wireless Gadgets Worth Buying in 2026</div><div class="blog-meta">June 2026 · 4 min read</div></div></div>
-      <div class="blog-card"><div class="blog-img" style="background:#fff5f0">🐾</div><div class="blog-body"><div class="blog-tag">Pets</div><div class="blog-title">The Essential Pet Accessories Every Dog Owner Needs</div><div class="blog-meta">June 2026 · 3 min read</div></div></div>
-      <div class="blog-card"><div class="blog-img" style="background:#f0fff4">💪</div><div class="blog-body"><div class="blog-tag">Fitness</div><div class="blog-title">Build a Home Gym for Under $100 — Our Top Picks</div><div class="blog-meta">May 2026 · 5 min read</div></div></div>
-      <div class="blog-card"><div class="blog-img" style="background:#fffbf0">🚗</div><div class="blog-body"><div class="blog-tag">Auto</div><div class="blog-title">Must-Have Car Accessories for Long Road Trips in the USA</div><div class="blog-meta">May 2026 · 4 min read</div></div></div>
-    </div>
-  </div>
-</section>
+<!-- Blog section removed — add real blog posts when ready -->
 
 <!-- NEWSLETTER -->
 <section class="newsletter">
@@ -614,37 +580,31 @@ footer{background:#0f0f0f;padding:4rem 0 0;color:rgba(255,255,255,0.55);}
       <div>
         <div class="footer-heading">Company</div>
         <div class="footer-links">
-          <a class="footer-link" href="#">Our Story</a>
-          <a class="footer-link" href="#">Blog</a>
-          <a class="footer-link" href="#">Meet The Team</a>
-          <a class="footer-link" href="#">Careers</a>
-          <a class="footer-link" href="#">Press</a>
-          <a class="footer-link" href="#">Affiliates</a>
-          <a class="footer-link" href="#">Sustainability</a>
+          <a class="footer-link" href="supplier-guide.html">Supplier Guide</a>
+          <a class="footer-link" href="how-to-guide.html">How It Works</a>
+          <a class="footer-link" href="mailto:support@pickbazaar.com">Contact Us</a>
         </div>
       </div>
       <div>
         <div class="footer-heading">Shop</div>
         <div class="footer-links">
-          <a class="footer-link" href="#" onclick="filterCat('Fashion')">Fashion</a>
-          <a class="footer-link" href="#" onclick="filterCat('Electronics')">Electronics</a>
-          <a class="footer-link" href="#" onclick="filterCat('Home')">Home & Garden</a>
-          <a class="footer-link" href="#" onclick="filterCat('Beauty')">Beauty & Health</a>
-          <a class="footer-link" href="#" onclick="filterCat('Pets')">Pets</a>
-          <a class="footer-link" href="#" onclick="filterCat('Auto')">Auto Accessories</a>
-          <a class="footer-link" href="#" onclick="filterCat('Gym')">Gym & Fitness</a>
-          <a class="footer-link" href="#" onclick="filterCat('Sale')">Special Deals</a>
+          <a class="footer-link" href="javascript:void(0)" onclick="filterCat('Fashion')">Fashion</a>
+          <a class="footer-link" href="javascript:void(0)" onclick="filterCat('Electronics')">Electronics</a>
+          <a class="footer-link" href="javascript:void(0)" onclick="filterCat('Home')">Home & Garden</a>
+          <a class="footer-link" href="javascript:void(0)" onclick="filterCat('Beauty')">Beauty & Health</a>
+          <a class="footer-link" href="javascript:void(0)" onclick="filterCat('Pets')">Pets</a>
+          <a class="footer-link" href="javascript:void(0)" onclick="filterCat('Auto')">Auto Accessories</a>
+          <a class="footer-link" href="javascript:void(0)" onclick="filterCat('Gym')">Gym & Fitness</a>
+          <a class="footer-link" href="javascript:void(0)" onclick="filterCat('Sale')">Special Deals</a>
         </div>
       </div>
       <div>
         <div class="footer-heading">Support</div>
         <div class="footer-links">
-          <a class="footer-link" href="#">Contact Us</a>
-          <a class="footer-link" href="#">Shipping Info</a>
-          <a class="footer-link" href="#">Returns Center</a>
-          <a class="footer-link" href="#">Track My Order</a>
-          <a class="footer-link" href="#">FAQ</a>
-          <a class="footer-link" href="#">Payment Methods</a>
+          <a class="footer-link" href="mailto:support@pickbazaar.com">Email Support</a>
+          <a class="footer-link" href="mailto:support@pickbazaar.com">Shipping Questions</a>
+          <a class="footer-link" href="mailto:support@pickbazaar.com">Returns & Refunds</a>
+          <a class="footer-link" href="mailto:support@pickbazaar.com">Track My Order</a>
         </div>
       </div>
       <div>
@@ -664,10 +624,9 @@ footer{background:#0f0f0f;padding:4rem 0 0;color:rgba(255,255,255,0.55);}
     <div class="footer-bottom">
       <span>© 2026 PickBazaar. All Rights Reserved.</span>
       <div class="footer-legal">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Accessibility</a>
-        <a href="#">Cookie Policy</a>
+        <a href="mailto:support@pickbazaar.com">Contact</a>
+        <a href="supplier-guide.html">Supplier Guide</a>
+        <a href="how-to-guide.html">Shop Guide</a>
       </div>
       <span>🇺🇸 USA & 🌍 Worldwide Shipping</span>
     </div>
@@ -705,24 +664,9 @@ let cart     = JSON.parse(localStorage.getItem('myshop-cart') || '[]');
 let activeCat = 'All';
 
 // Demo products shown when admin has no products yet
-const DEMO = [
-  {id:'d1',name:'Wireless Noise-Cancelling Earbuds',niche:'Electronics',emoji:'🎧',sell:29.99,cost:8,desc:'Premium sound quality with 30hr battery life.',stripeLink:''},
-  {id:'d2',name:'Floral Summer Dress',niche:'Fashion',emoji:'👗',sell:34.99,cost:9,desc:'Lightweight and breathable for warm weather.',stripeLink:''},
-  {id:'d3',name:'LED Desk Lamp with USB Charging',niche:'Home',emoji:'💡',sell:39.99,cost:12,desc:'3 colour modes and touch dimmer control.',stripeLink:''},
-  {id:'d4',name:'Vitamin C Brightening Serum',niche:'Beauty',emoji:'✨',sell:22.99,cost:6,desc:'Reduces dark spots and boosts radiance.',stripeLink:''},
-  {id:'d5',name:'Interactive Dog Puzzle Toy',niche:'Pets',emoji:'🐾',sell:19.99,cost:5,desc:'Keeps dogs mentally stimulated for hours.',stripeLink:''},
-  {id:'d6',name:'Car Phone Holder & Fast Charger',niche:'Auto',emoji:'🚗',sell:24.99,cost:7,desc:'360° rotation with 15W wireless charging.',stripeLink:''},
-  {id:'d7',name:'Resistance Bands Set (5 Levels)',niche:'Gym',emoji:'💪',sell:27.99,cost:8,desc:'Heavy duty latex bands for full body workouts.',stripeLink:''},
-  {id:'d8',name:'Smart Fitness Tracker Watch',niche:'Gym',emoji:'⌚',sell:49.99,cost:15,desc:'Heart rate, sleep tracking and GPS.',stripeLink:''},
-  {id:'d9',name:'Pet Grooming Brush Self-Cleaning',niche:'Pets',emoji:'🐕',sell:16.99,cost:4,desc:'One-click button releases collected fur.',stripeLink:''},
-  {id:'d10',name:'Cute Dog Socks (4 Pack)',niche:'Pets',emoji:'🧦',sell:12.99,cost:3,desc:'Anti-slip silicone grip for hardwood floors.',stripeLink:''},
-  {id:'d11',name:'Car Seat Organiser & Storage',niche:'Auto',emoji:'🪑',sell:21.99,cost:6,desc:'Fits all car models. Multiple pockets.',stripeLink:''},
-  {id:'d12',name:'Yoga Mat Non-Slip Extra Thick',niche:'Gym',emoji:'🧘',sell:32.99,cost:10,desc:'6mm thickness with carrying strap included.',stripeLink:''},
-];
-
+// No demo products — only real products added via Admin panel show here
 function getProds() {
-  const p = JSON.parse(localStorage.getItem('myshop-products') || '[]');
-  return p.length ? p : DEMO;
+  return JSON.parse(localStorage.getItem('myshop-products') || '[]');
 }
 
 const NC = {
@@ -787,7 +731,7 @@ function renderAll(){
   // Gym section
   const gym = all.filter(p=>p.niche==='Gym').slice(0,4);
   const gymEl = document.getElementById('gym-grid');
-  if(gymEl) gymEl.innerHTML = gym.length ? gym.map(p=>prodCard(p,'new')).join('') : `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted);font-size:0.875rem">Add Gym & Fitness products in <a href="my-shop.html" style="color:var(--brand);font-weight:600">Admin</a> to show here. Demo products shown above.</div>`;
+  if(gymEl) gymEl.innerHTML = gym.length ? gym.map(p=>prodCard(p,'new')).join('') : `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted);font-size:0.875rem">Add Gym & Fitness products in the <a href="my-shop.html" style="color:var(--brand);font-weight:600">Admin panel</a> to show here.</div>`;
 
   // Deals strip
   const deals = all.filter(p=>margin(p)>55).slice(0,4);
@@ -812,15 +756,19 @@ function renderAll(){
       <div class="trend-name">${p.name}</div>
     </div>`).join('');
 
-  // Hero cards — show real products if available
+  // Hero cards — only show real products from Admin
   const hc = document.getElementById('hero-cards');
-  if(hc && all.length){
-    hc.innerHTML = all.slice(0,4).map(p=>`
-      <div class="hc" onclick="addToCart('${p.id}')">
-        <div class="hc-emoji">${p.emoji}</div>
-        <div class="hc-name">${p.name}</div>
-        <div class="hc-price">$${p.sell.toFixed(2)}</div>
-      </div>`).join('');
+  if(hc){
+    if(all.length){
+      hc.innerHTML = all.slice(0,4).map(p=>`
+        <div class="hc" onclick="addToCart('${p.id}')">
+          <div class="hc-emoji">${p.emoji}</div>
+          <div class="hc-name">${p.name}</div>
+          <div class="hc-price">$${p.sell.toFixed(2)}</div>
+        </div>`).join('');
+    } else {
+      hc.innerHTML = '';
+    }
   }
 }
 
@@ -828,7 +776,7 @@ function emptyMsg(){
   return `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)">
     <div style="font-size:3rem;margin-bottom:1rem">🛍️</div>
     <p style="font-weight:700;margin-bottom:0.4rem">No products yet</p>
-    <p style="font-size:0.85rem">Add products in the <a href="my-shop.html" style="color:var(--brand);font-weight:600">Admin panel</a>. Demo products are shown above.</p>
+    <p style="font-size:0.85rem">Add your real products in the <a href="my-shop.html" style="color:var(--brand);font-weight:600">Admin panel</a> to show them here.</p>
   </div>`;
 }
 
@@ -991,7 +939,7 @@ startCountdown();
 </script>
 
   <!-- SNIPCART CONTAINER -->
-  <div hidden id="snipcart" data-api-key="ODA5ZDlkNGQtZDA1MS00YmM2LWI4MDMtYzhlOWJiZjAyZjVjNjM5MjA0Mjc0NzI5NzQzOTUz" data-config-modal-style="side"></div>
+  <div hidden id="snipcart" data-api-key="YOUR_SNIPCART_PUBLIC_KEY" data-config-modal-style="side"></div>
   <script async src="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.js"></script>
   <script>
     // Wire our custom cart button to open Snipcart
